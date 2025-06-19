@@ -213,7 +213,7 @@ var out = document.getElementById("output");
                 '"Beauty School Dropout", Grease (1978)',
                 'Vascaíno (2011)',
                 '"Buddy, Come Over", Everything Everything (2024)',
-                '"The King of Rock \'N\' Roll", Prefab Sprount (1988)',
+                '"The King of Rock \'N\' Roll", Prefab Sprout (1988)',
                 '"I.D.S", The Moonlandingz (2017)',
                 '"Mairzy Doats" (1943)',
                 '"Cowboy Nudes", Geese (2023)',
