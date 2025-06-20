@@ -184,7 +184,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   </ul></li>
-  <li><a href="#relevance-vector-machine-for-regression" id="toc-relevance-vector-machine-for-regression" class="nav-link" data-scroll-target="#relevance-vector-machine-for-regression">Relevance Vector Machine for Regression</a>
+  <li><a href="#relevance-vector-machines-for-regression" id="toc-relevance-vector-machines-for-regression" class="nav-link" data-scroll-target="#relevance-vector-machines-for-regression">Relevance Vector Machines for Regression</a>
   <ul class="collapse">
   <li><a href="#fixed-point-updates" id="toc-fixed-point-updates" class="nav-link" data-scroll-target="#fixed-point-updates">Fixed Point Updates</a></li>
   <li><a href="#expectation-maximization-approach" id="toc-expectation-maximization-approach" class="nav-link" data-scroll-target="#expectation-maximization-approach">Expectation Maximization Approach</a></li>
@@ -278,7 +278,7 @@ window.Quarto = {
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>This vignette is primarily concerned with presenting an approach to sparse Functional Data representation utilizing the Automatic Relevance Determination (ARD) framework, itself only a topic in the wider Sparse Bayesian Learning (SBL) context. More precisely, our aim herein is to replicate some of the studies in <span class="citation" data-cites="sousa:2024">Sousa, Souza, and and (<a href="#ref-sousa:2024" role="doc-biblioref">2024</a>)</span> and <span class="citation" data-cites="daCruz:2024">Cruz, Souza, and Sousa (<a href="#ref-daCruz:2024" role="doc-biblioref">2024</a>)</span> (the former moreso than the latter, as we do not account for any correlation structure in the curves). The goal of these previous studies was to provide a novel Bayesian adaptive procedure to select the bases for functional data representation, the latter also extending the results of the former by including a correlation structure for the functional data, and delineating an estimation procedure utilizing the Variational Bayes (VB) approach.</p>
+<p>This vignette is primarily concerned with presenting an approach to sparse Functional Data representation utilizing the Automatic Relevance Determination (ARD) framework, itself only a topic in the wider Sparse Bayesian Learning (SBL) context. More precisely, our aim herein is to replicate some of the studies in <span class="citation" data-cites="sousa:2024">Sousa, Souza, and Dias (<a href="#ref-sousa:2024" role="doc-biblioref">2024</a>)</span> and <span class="citation" data-cites="daCruz:2024">Cruz, Souza, and Sousa (<a href="#ref-daCruz:2024" role="doc-biblioref">2024</a>)</span> (the former moreso than the latter, as we do not account for any correlation structure in the curves). The goal of these previous studies was to provide a novel Bayesian adaptive procedure to select the bases for functional data representation, the latter also extending the results of the former by including a correlation structure for the functional data, and delineating an estimation procedure utilizing the Variational Bayes (VB) approach.</p>
 <p><span class="math display">\[
   \beta \sim \text{Normal}(0_K,\textbf{A}).
 \]</span> where <span class="math inline">\(\textbf{A} = \text{diag}(\alpha_i)\)</span>. For further detailing and intuition on the inner workings of the ARD approach, we refer the reader to <span class="citation" data-cites="tipping:2001">Tipping (<a href="#ref-tipping:2001" role="doc-biblioref">2001</a>)</span></p>
@@ -291,8 +291,8 @@ window.Quarto = {
 <hr>
 </section>
 </section>
-<section id="relevance-vector-machine-for-regression" class="level1">
-<h1>Relevance Vector Machine for Regression</h1>
+<section id="relevance-vector-machines-for-regression" class="level1">
+<h1>Relevance Vector Machines for Regression</h1>
 <p><span class="math display">\[
   q_i = \frac{\alpha_i Q_i}{\alpha_i - S_i}
 \]</span> and <span class="math display">\[
@@ -309,10 +309,6 @@ window.Quarto = {
 </section>
 <section id="concluding-remarks" class="level1">
 <h1>Concluding Remarks</h1>
-<hr>
-<blockquote class="blockquote">
-<p>“So, I rake the sky<br>I listen hard<br>I trawl the megahertz<br>But the net isn’t fine enough, and I miss you<br>A swan sailing between two continents<br>A ghost immune to radar”<br><a href="https://open.spotify.com/intl-pt/track/5SrrNjgc5Diwj3IunGepM6?si=4d9990e05f394472">‘I Trawl the Megahertz’, Paddy McAloon (2003)</a></p>
-</blockquote>
 </section>
 <section id="references" class="level1">
 
@@ -332,7 +328,7 @@ Cruz, Ana Carolina da, Camila P. E. de Souza, and Pedro H. T. O. Sousa. 2024. <s
 Silverman, B. W. 1985. <span>“Some Aspects of the Spline Smoothing Approach to Non-Parametric Regression Curve Fitting.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 47 (1): 1–21. <a href="https://doi.org/10.1111/j.2517-6161.1985.tb01327.x">https://doi.org/10.1111/j.2517-6161.1985.tb01327.x</a>.
 </div>
 <div id="ref-sousa:2024" class="csl-entry" role="listitem">
-Sousa, Pedro Henrique T. O., Camila P. E. de Souza, and Ronaldo Dias and. 2024. <span>“Bayesian Adaptive Selection of Basis Functions for Functional Data Representation.”</span> <em>Journal of Applied Statistics</em> 51 (5): 958–92. <a href="https://doi.org/10.1080/02664763.2023.2172143">https://doi.org/10.1080/02664763.2023.2172143</a>.
+Sousa, Pedro Henrique T. O., Camila P. E. de Souza, and Ronaldo Dias. 2024. <span>“Bayesian Adaptive Selection of Basis Functions for Functional Data Representation.”</span> <em>Journal of Applied Statistics</em> 51 (5): 958–92. <a href="https://doi.org/10.1080/02664763.2023.2172143">https://doi.org/10.1080/02664763.2023.2172143</a>.
 </div>
 <div id="ref-tipping:2001" class="csl-entry" role="listitem">
 Tipping, Michael E. 2001. <span>“Sparse Bayesian Learning and the Relevance Vector Machine.”</span> <em>J. Mach. Learn. Res.</em> 1 (September): 211–44. <a href="https://doi.org/10.1162/15324430152748236">https://doi.org/10.1162/15324430152748236</a>.
