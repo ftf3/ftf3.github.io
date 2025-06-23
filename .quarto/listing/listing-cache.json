@@ -1,0 +1,10 @@
+{
+  "listingMap": {
+    "vignettes.qmd": [
+      "vignettes"
+    ],
+    "solutions.qmd": [
+      "solutions"
+    ]
+  }
+}

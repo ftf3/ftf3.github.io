@@ -1,0 +1,2 @@
+"0","#| tbl-cap: ""Snapshot of the five first rows of the '<tt>tecator</tt>' dataset. Note that the column labelled as '<tt>absorbance</tt>' is composed of '<tt>tfd</tt>' objects, from the '<tt>tidyfun</tt>' <tt>R</tt> package."""
+"0","knitr::kable(head(tecator_data, 5), align = 'rrrcl')"

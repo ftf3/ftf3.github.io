@@ -1,0 +1,23 @@
+---
+title: "Felipe Ferreira"
+subtitle: "...on Statistics"
+about:
+  template: trestles
+  image: FDA logo.png
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/FelipeToledoFerreira
+    - icon: ""
+      text: "<i class='ai ai-lattes'></i> Lattes"
+      href: http://lattes.cnpq.br/5987443167199319
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/felipe-toledo-ferreira-3585a9190/
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+I am a Statistician, having received my bachelor's degree in Statistics (2022) from the [Federal University of Juiz de Fora](https://www2.ufjf.br/cursoestatistica/) and my Master's degree in Statistics (2024) from the [University of São Paulo](https://www.ime.usp.br/pos-estatistica/). My main research interests are Nonparametric Statistics, Functional Data Analysis and Approximate Inference.
+
+Check out my [undergraduate thesis](https://repositorio.ufjf.br/jspui/handle/ufjf/15435) (in Portuguese) or my [Master's thesis](https://www.teses.usp.br/teses/disponiveis/45/45133/tde-04112024-163842/en.php).

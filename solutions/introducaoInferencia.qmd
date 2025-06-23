@@ -1,0 +1,8 @@
+---
+title: "Introdução à Inferência Estatística"
+subtitle: 'Heleno Bolfarine and Mônica Carneiro Sandoval'
+author: "[Felipe Toledo Ferreira](https://github.com/FelipeToledoFerreira)"
+date: today
+---
+
+<object data="introducaoInferencia.pdf" type="application/pdf" width=100% height=950px></object>

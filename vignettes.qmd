@@ -1,0 +1,13 @@
+---
+title: "<tt>R</tt> Vignettes"
+listing:
+  contents: vignettes
+  sort: "date desc"
+  type: default
+  categories: false
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: false
+---
+This page consists of some Vignettes I have developed utilizing the <tt>R</tt> programming language.

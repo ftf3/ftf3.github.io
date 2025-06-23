@@ -1,0 +1,130 @@
+---
+title: 'Automatic Relevance Determination for Functional Data Representation'
+subtitle: '...a Vignette on Functional Data Analysis'
+author: "[Felipe Toledo Ferreira](https://github.com/FelipeToledoFerreira)"
+date: today
+description: "I present a approach to functional data representation based on automatic relevance determination and compare it with previous approaches."
+bibliography: vignette0002.bib
+bibliographystyle: apa
+nocite: |
+  @tipping:2001, @bishop:2006, @daCruz:2024, @silverman:1985, @venables:2002, @sousa:2024
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+---
+
+# Introduction
+
+## Data
+For this particular study, we consider two distinct data sets, the Motorcycle data set and the Canadian weather data set: the former is frequently studied in the overall spline smoothing context, whilst the latter is appropriate for the more specific context of Functional Data Analysis. We will also present a brief simulation study.
+
+```{r packages, message = FALSE, warning=FALSE}
+library("tidyverse")  ## R package for tidy data manipulation and visualization
+library("tf")         ## R package for tidy functional data manipulation
+library("tidyfun")    ## R package for tidy functional data visualization
+library("extrafont")
+library("fda")
+library("MASS")
+library("tf")         ## R package for tidy functional data manipulation
+```
+
+### The Motorcycle data set
+The Motorcycle data set (seen in @silverman:1985, and available in the <tt>R</tt> programming language in the package <tt>MASS</tt>), is composed of data recorded on a Tecator Infratec Food and Feed Analyzer tool, working in the wavelength range 850 - 1050<i>nm</i> by the Near Infrared  Transmission (NIT) principle. Each sample ($N = 240$) contains finely chopped pure meat with different moisture, fat and protein contents. For each meat sample the data consists of a 100 channel spectrum of absorbances and the contents of moisture (water), fat and protein. The absorbance is $-\log_{10}$ of the transmittance measured by the spectrometer. The three contents, measured in percent, are determined by analytic chemistry (click [here](https://lib.stat.cmu.edu/datasets/tecator) for further details).
+
+```{r data0001, message = FALSE}
+motorcycle_data = data.frame(id = 1)
+motorcycle_data$curve = tfd(data = mcycle$accel,
+                            arg = jitter(mcycle$times, amount = 0.1))
+motorcycle_data$smooth_curve = motorcycle_data$curve |> 
+  tfb(basis = "spline",
+      verbose = FALSE,
+      k = 15,
+      bs = "cr")
+g03 = motorcycle_data |>
+  ggplot(mapping = aes(y = smooth_curve)) +
+  geom_spaghetti() +
+  theme_classic() +
+  theme(text = element_text(size = unit(11, "pt"),
+                            family = "LM Roman 10",
+                            color = "black"),
+        axis.line = element_line(arrow = grid::arrow(length = unit(0.08, "cm"), 
+                                                     ends = "last",
+                                                     angle = 30,
+                                                     type = "closed"),
+                                 linewidth = .25),
+        axis.ticks = element_line(color = "black",
+                                  linewidth = .125),
+        legend.position = "top") +
+  labs(x = expression(paste("Wavelength ", "(in ", italic("nm"), ")")),
+       y = "Absorbance",
+       col = "")
+g03
+```
+
+### The Canadian weather data set
+The Canadian weather data set
+
+### Simulated data
+$$
+  y_i(t_{i,j}) = \cos(t_{i,j}) + \sin(2 t_{i,j}) + \varepsilon_{i}(t_{i,j})
+$$
+and
+$$
+  y_i(t_{i,j}) = \begin{pmatrix}
+    -2 \\
+    0 \\
+    3/2 \\
+    3/2 \\
+    0 \\
+    -1 \\
+    -1/2 \\
+    -1 \\
+    0 \\
+    0
+  \end{pmatrix}\textbf{B}(t_{i,j}) + \varepsilon_i(t_{i,j})
+$$
+
+## Setup
+This vignette is primarily concerned with presenting an approach to sparse Functional Data representation utilizing the Automatic Relevance Determination (ARD) framework, itself only a topic in the wider Sparse Bayesian Learning (SBL) context. More precisely, our aim herein is to replicate some of the studies in @sousa:2024 and @daCruz:2024 (the former moreso than the latter, as we do not account for any correlation structure in the curves). The goal of these previous studies was to provide a novel Bayesian adaptive procedure to select the bases for functional data representation, the latter also extending the results of the former by including a correlation structure for the functional data, and delineating an estimation procedure utilizing the Variational Bayes (VB) approach.
+
+$$
+  \beta \sim \text{Normal}(0_K,\textbf{A}).
+$$
+where $\textbf{A} = \text{diag}(\alpha_i)$. For further detailing and intuition on the inner workings of the ARD approach, we refer the reader to @tipping:2001
+
+$$
+  \begin{aligned}
+    \Sigma & = (\textbf{A} + \beta \Phi^\top \Phi)^{-1} \\
+    & = \textbf{A}^{-1} - \textbf{A}^{-1}\Phi^\top(\mathbb{I}_N + \beta \Phi \textbf{A}^{-1} \Phi^\top )^{-1}\Phi \textbf{A}^{-1}
+  \end{aligned}
+$$
+
+---
+
+# Relevance Vector Machines for Regression
+
+$$
+  q_i = \frac{\alpha_i Q_i}{\alpha_i - S_i}
+$$
+and
+$$
+  s_i = \frac{\alpha_i S_i}{\alpha_i - S_i}
+$$
+
+## Fixed Point Updates
+
+A
+
+## Expectation Maximization Approach
+
+B
+
+# Concluding Remarks
+
+# References

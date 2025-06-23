@@ -1,0 +1,33 @@
+project:
+  type: website
+
+website:
+  title: "Felipe Ferreira"
+  favicon: FDA logo.png
+  navbar:
+    left:
+      - vignettes.qmd
+      - solutions.qmd
+    background: '#AD1519'
+    foreground: white
+  page-footer:
+    background: '#AD1519'
+    foreground: white
+    center:
+      - text: '<div id="output"></div><div id="person"></div><script src="index.js"></script>'
+        href: '...'
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    code-fold: true
+    fig_caption: yes
+    tab_caption: yes
+    mathfont-size: 28pt
+    html-math-method: mathjax
+    code-block-bg: true
+    code-block-border-left: "#AD1519"
+
+editor: source
