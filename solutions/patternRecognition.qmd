@@ -1,8 +1,0 @@
----
-title: "Pattern Recognition and Machine Learning"
-subtitle: 'Christopher M. Bishop'
-author: "[Felipe Toledo Ferreira](https://github.com/FelipeToledoFerreira)"
-date: today
----
-
-<object data="patternRecognition.pdf" type="application/pdf" width=100% height=950px></object>

@@ -1,4 +1,0 @@
-"0","#| tbl-cap: ""Comparisons of the '<tt>absorbance</tt>' and '<tt>dabsorbance</tt>' columns of the five first rows of the '<tt>tecator</tt>' dataset. The column labelled as '<tt>dabsorbance</tt>' is composed of '<tt>tfd</tt>' objects, and represents the first order derivative of the '<tt>absorbance</tt>' column, as computed via finite differences."""
-"0","tecator_data = tecator_data |> mutate(dabsorbance = tf_derive(absorbance,"
-"0","                                                              order = 1))"
-"0","knitr::kable(head(tecator_data[c('fat', 'absorbance', 'dabsorbance')], 5), align = 'cc')"
