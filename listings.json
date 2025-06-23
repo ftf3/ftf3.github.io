@@ -1,0 +1,16 @@
+[
+  {
+    "listing": "/vignettes.html",
+    "items": [
+      "/vignettes/vignette0001.html",
+      "/vignettes/vignette0002.html"
+    ]
+  },
+  {
+    "listing": "/solutions.html",
+    "items": [
+      "/solutions/introducaoInferencia.html",
+      "/solutions/patternRecognition.html"
+    ]
+  }
+]
