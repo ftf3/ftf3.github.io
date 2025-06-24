@@ -117,7 +117,8 @@ var out = document.getElementById("output");
                 '"You will hate life more than life hates you."',
                 '"They\'re turning kids into slaves just to make sneakers cheaper, but what\'s the real cost? Cause the sneakers don\'t seem that much cheaper."',
                 '"Hey you!"',
-                '"And I can\'t believe that anyone would wanna do such a terrible thing, but why should I care?"',];
+                '"And I can\'t believe that anyone would wanna do such a terrible thing, but why should I care?"',
+                '"They send the heart police to put you under cardiac arrest."',];
 	var theSource= [
                 'Chaco, Cannibal Holocaust (1980)',
                 '"Magic Bus", The Who (1968)',
@@ -236,7 +237,8 @@ var out = document.getElementById("output");
                 '"The Air-Conditioned Nightmare", Mr. Bungle (1999)',
                 '"Think About It", Flight of the Conchords (2008)',
                 '"Carousel", Mr. Bungle (1991)',
-                '"Nothing Bad Ever Happens To Me", Oingo Boingo (1983)',];
+                '"Nothing Bad Ever Happens To Me", Oingo Boingo (1983)',
+                '"The Plastic Age", The Buggles (1980)',];
         if(sessionStorage.getItem('theQuotes') !== null)
         {
             var seen = JSON.parse(sessionStorage.getItem("theQuotes"));

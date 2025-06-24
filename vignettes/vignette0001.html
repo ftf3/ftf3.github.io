@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Felipe Toledo Ferreira">
-<meta name="dcterms.date" content="2025-06-21">
+<meta name="dcterms.date" content="2025-06-23">
 <meta name="description" content="I present some topics in functional regression utilizing the Tecator Infratec Analyzer dataset.">
 
 <title>Tecator Infratec Analyzer – Felipe Ferreira</title>
@@ -98,7 +98,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ba5eecaeabb2cbcebdce456e8b5515e7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0383dabcd0d383963fa6a9867e3b47b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -252,7 +252,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 21, 2025</p>
+      <p class="date">June 23, 2025</p>
     </div>
   </div>
   
@@ -276,7 +276,7 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"fda.usc"</span>)    <span class="do">## R package containing the 'tecator' dataset</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"fda.usc"</span>)    <span class="do">## R package containing the 'tecator' dataset</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)  <span class="do">## R package for tidy data manipulation and visualization</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tf"</span>)         <span class="do">## R package for tidy functional data manipulation</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyfun"</span>)    <span class="do">## R package for tidy functional data visualization</span></span>
@@ -295,7 +295,7 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Importing the 'tecator' dataset</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Importing the 'tecator' dataset</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(tecator)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Converting 'tecator' to df (data frame)</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">fat =</span> tecator<span class="sc">$</span>y<span class="sc">$</span>Fat,</span>
@@ -383,7 +383,7 @@ Table&nbsp;1: Snapshot of the five first rows of the ‘<tt>tecator</tt>’ data
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>g01 <span class="ot">=</span> tecator<span class="sc">$</span>y <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Fat)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>g01 <span class="ot">=</span> tecator<span class="sc">$</span>y <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Fat)) <span class="sc">+</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"cyan"</span>,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> .<span class="dv">25</span>,</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
@@ -488,7 +488,7 @@ Table&nbsp;2: Sample summary statistics of the fat percentage.
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g03 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g03 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> absorbance,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> fat20)) <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>() <span class="sc">+</span></span>
@@ -574,7 +574,7 @@ Figure&nbsp;2: Left panel: spaghetti plot of the absorbance curves, separated by
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>g05 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>g05 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fat20) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">var_absorbance =</span> <span class="fu">var</span>(absorbance)) <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fat20 =</span> <span class="fu">factor</span>(fat20,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"20% &lt; Fat"</span>,</span>
@@ -720,7 +720,7 @@ Table&nbsp;3: Comparisons of the ‘<tt>absorbance</tt>’ and ‘<tt>dabsorbanc
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g07 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g07 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> dabsorbance,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> fat20)) <span class="sc">+</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>() <span class="sc">+</span></span>
@@ -798,7 +798,7 @@ Figure&nbsp;4: Left panel: spaghetti plot of the derivative of the absorbance cu
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g09 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g09 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fat20) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">var_dabsorbance =</span> <span class="fu">var</span>(dabsorbance)) <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fat20 =</span> <span class="fu">factor</span>(fat20,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"20% &lt; Fat"</span>,</span>
@@ -892,7 +892,7 @@ Figure&nbsp;5: Left panel: variance of the derivative of the absorbance curves, 
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tecator_data<span class="sc">$</span>absorbance <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>(<span class="at">byrow =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">t</span>() <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fbplot</span>(<span class="at">xlab =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Wavelength (in "</span>,<span class="fu">italic</span>(<span class="st">"nm"</span>),<span class="st">")"</span>)),</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ylab =</span> <span class="fu">substitute</span>(<span class="st">"Absorbance"</span>),</span>
@@ -958,7 +958,7 @@ Figure&nbsp;6: Upper panel: functional boxplots of the absorbance curves. Lower 
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>g11 <span class="ot">=</span> g03</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>g11 <span class="ot">=</span> g03</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>g11<span class="sc">$</span>data <span class="ot">=</span> g11<span class="sc">$</span>data[ <span class="sc">-</span> <span class="fu">c</span>(<span class="dv">43</span>, <span class="dv">44</span>, <span class="dv">140</span>, <span class="dv">99</span>, <span class="dv">185</span>) , ]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>g11 <span class="ot">=</span> g11 <span class="sc">+</span> tecator_data[ <span class="fu">c</span>(<span class="dv">43</span>, <span class="dv">44</span>, <span class="dv">99</span>, <span class="dv">185</span>) , ] <span class="sc">|&gt;</span> </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> absorbance),</span>
@@ -991,7 +991,7 @@ Figure&nbsp;7: Upper panel: spaghetti plot of the absorbance curves, separated b
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>g04 <span class="ot">=</span> g04 <span class="sc">+</span> tecator_data <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>g04 <span class="ot">=</span> g04 <span class="sc">+</span> tecator_data <span class="sc">|&gt;</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fat20) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">median_absorbance =</span> <span class="fu">median</span>(absorbance)) <span class="sc">|&gt;</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fat20 =</span> <span class="fu">factor</span>(fat20,</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"20% &lt; Fat"</span>,</span>
@@ -1036,7 +1036,7 @@ Figure&nbsp;8: Upper panel: mean and median absorbance curves, separated by fat 
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">absorbance_basis =</span> <span class="fu">tfb</span>(absorbance,</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">absorbance_basis =</span> <span class="fu">tfb</span>(absorbance,</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                                                             <span class="at">basis =</span> <span class="st">"spline"</span>,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                                             <span class="at">bs =</span> <span class="st">"bs"</span>,</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                                                             <span class="at">k =</span> <span class="dv">15</span>,</span>
@@ -1094,7 +1094,7 @@ Figure&nbsp;9: Left panel: raw absorbance curves. Right panel: smoothed absorban
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>g14 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>g14 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> dabsorbance_basis,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> fat20)) <span class="sc">+</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>() <span class="sc">+</span></span>
@@ -1150,7 +1150,7 @@ Figure&nbsp;10: Left panel: raw derivative of the absorbance curves. Right panel
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">747</span>)</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">747</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="fu">nrow</span>(tecator_data)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>prop_train <span class="ot">=</span> .<span class="dv">5</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> </span>
@@ -1259,13 +1259,13 @@ On estimating the deviation parameter
   \mathbb{V}\text{ar}[Y_i \vert \mu_i] = \sigma^2 \mu_i(1 - \mu_i).
 \]</span> Consequently, we estimate the deviance parameter, based in the scale parameter estimate obtained by <tt>gamlss</tt>, as <span id="eq-deviance"><span class="math display">\[
   \hat{\phi} = \frac{1 - \hat{\sigma}^2}{\hat{\sigma}^2}.
-\tag{3}\]</span></span> We thereafter reestimate the FGAM model using the deviance estimate obtained via <a href="#eq-deviance" class="quarto-xref">Equation&nbsp;3</a>, repeating the procedure until a maximum number of iterations is reached (which we have set to 25). An additional benefit of this coupling is that it allows us to utilize the residual analysis tools available from the <tt>gamlss</tt> package to better diagnose our model’s fit.</p>
+\tag{3}\]</span></span> We thereafter reestimate the FGAM model using a fixed deviance estimate obtained via <a href="#eq-deviance" class="quarto-xref">Equation&nbsp;3</a>, repeating the procedure until a maximum number of iterations is reached (which we have set to 25). An additional benefit of this coupling is that it allows us to utilize the residual analysis tools available from the <tt>gamlss</tt> package to better diagnose our model’s fit.</p>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">dabsorbance_matrix =</span> dabsorbance <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>(),</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">dabsorbance_matrix =</span> dabsorbance <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>(),</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">fat =</span> fat <span class="sc">/</span> <span class="dv">100</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>theta_initial <span class="ot">=</span> <span class="dv">1</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>max_iterations <span class="ot">=</span> <span class="dv">25</span></span>
@@ -1454,7 +1454,7 @@ Figure&nbsp;13: Residual analysis plot generated by the <tt>gamlss</tt> object f
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="fu">smooth_estimates</span>(fit_total) </span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="fu">smooth_estimates</span>(fit_total) </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> se <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">x =</span> (<span class="fl">1048.9899</span> <span class="sc">-</span> <span class="fl">851.0101</span>) <span class="sc">*</span> dabsorbance_matrix.tmat <span class="sc">+</span> <span class="fl">851.0101</span>,</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> dabsorbance_matrix.omat) <span class="sc">|&gt;</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dabsorbance_matrix.tmat =</span> <span class="cn">NULL</span>,</span>
@@ -1500,7 +1500,7 @@ Figure&nbsp;13: Residual analysis plot generated by the <tt>gamlss</tt> object f
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r funky code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tecator_data<span class="sc">$</span>normdabsorbance_matrix <span class="ot">=</span> tecator_data<span class="sc">$</span>dabsorbance_matrix</span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tecator_data<span class="sc">$</span>normdabsorbance_matrix <span class="ot">=</span> tecator_data<span class="sc">$</span>dabsorbance_matrix</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span> <span class="sc">:</span> <span class="fu">ncol</span>(tecator_data<span class="sc">$</span>dabsorbance_matrix))</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  aux_dabsorbance <span class="ot">=</span> (tecator_data <span class="sc">|&gt;</span> <span class="fu">subset</span>(train <span class="sc">==</span> <span class="dv">1</span>))<span class="sc">$</span>dabsorbance_matrix[ , j ]</span>
