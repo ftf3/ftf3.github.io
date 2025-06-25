@@ -9,3 +9,6 @@ body{
   font-family: Arial;
   font-variant: small-caps;
 }
+tt {
+  background: lightgrey;
+}
