@@ -214,10 +214,7 @@ window.Quarto = {
   <li><a href="#functional-regression" id="toc-functional-regression" class="nav-link" data-scroll-target="#functional-regression">Functional Regression</a>
   <ul class="collapse">
   <li><a href="#generalized-functional-linear-model" id="toc-generalized-functional-linear-model" class="nav-link" data-scroll-target="#generalized-functional-linear-model">Generalized Functional Linear Model</a></li>
-  <li><a href="#functional-generalized-additive-model" id="toc-functional-generalized-additive-model" class="nav-link" data-scroll-target="#functional-generalized-additive-model">Functional Generalized Additive Model</a>
-  <ul class="collapse">
-  <li><a href="#transformations" id="toc-transformations" class="nav-link" data-scroll-target="#transformations">Transformations</a></li>
-  </ul></li>
+  <li><a href="#functional-generalized-additive-model" id="toc-functional-generalized-additive-model" class="nav-link" data-scroll-target="#functional-generalized-additive-model">Functional Generalized Additive Model</a></li>
   </ul></li>
   <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -1242,7 +1239,7 @@ Figure&nbsp;11: Left panel: smoothed absorbance curves on the training set. Righ
 <li>The link function <span class="math inline">\(g(\cdot)\)</span> to be adopted;</li>
 <li>The family adopted in the fitting procedure;</li>
 </ul>
-<p>amongst others. The third setting was alluded to previously when presenting the analysis of the Fat percentage data, wherein we observed that a distribution family of bounded support is ideal for the response variable, hence we will adopt the Beta regression framework. With respect to the link function, we determined, via residual analysis, that the <tt>probit</tt> link function results in the best fit (when comapared to the <tt>cloglog</tt>, <tt>cauchit</tt> and <tt>logit</tt> link functions). For the number of components on the functional additive term, we defined <span class="math inline">\(K_1 = K_2 = K\)</span>, and visually examined the predictive behavior of the models for <span class="math inline">\(K \in \{1,2,\ldots,10\}\)</span>. <a href="#fig-estimation0002" class="quarto-xref">Figure&nbsp;12</a> exhibits fitted versus true values, separated by training data and test data, for <span class="math inline">\(K \in \{5,6,7\}\)</span>. We note that the model with <span class="math inline">\(K = 6\)</span> presents less variability than the model with <span class="math inline">\(K = 5\)</span>, however the distinction between the model with <span class="math inline">\(K = 6\)</span> and <span class="math inline">\(K = 7\)</span> is less apparent. Likewise, we find that the change in estimate variability is similar through <span class="math inline">\(K &gt; 6\)</span>. Therefore, we likewise determined, via residuals analysis, the ideal number of components as <span class="math inline">\(K = 6\)</span>.</p>
+<p>amongst others. The third setting was alluded to previously when presenting the analysis of the Fat percentage data, wherein we observed that a distribution family of bounded support is ideal for the response variable, hence we will adopt the Beta regression framework. With respect to the link function, we determined, via residual analysis, that the <tt>probit</tt> link function results in the best fit (when comapared to the <tt>cloglog</tt>, <tt>cauchit</tt> and <tt>logit</tt> link functions). For the number of components on the functional additive term, we defined <span class="math inline">\(K_1 = K_2 = K\)</span>, and visually examined the predictive behavior of the models for <span class="math inline">\(K \in \{1,2,\ldots,10\}\)</span>. <a href="#fig-estimation0002" class="quarto-xref">Figure&nbsp;12</a> exhibits fitted versus true values, separated by training data and test data, for <span class="math inline">\(K \in \{5,6,7\}\)</span>. We note that the model with <span class="math inline">\(K = 6\)</span> presents less variability than the model with <span class="math inline">\(K = 5\)</span>, however the distinction between the model with <span class="math inline">\(K = 6\)</span> and <span class="math inline">\(K = 7\)</span> is less apparent. Likewise, we find that the change in estimate variability is similar through <span class="math inline">\(K &gt; 6\)</span>. Therefore, we likewise determined the ideal number of components via residuals analysis as <span class="math inline">\(K = 6\)</span>.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="On estimating the deviation parameter">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1410,16 +1407,8 @@ Figure&nbsp;12: Fitted values versus true values of Fat percentage, separated be
 </div>
 </div>
 </div>
-<p><a href="#fig-estimation0003" class="quarto-xref">Figure&nbsp;13</a> depicts the residual analysis plots output by a <tt>gamlss</tt> object in <tt>R</tt>. We note that the quantile residuals</p>
+<p><a href="#fig-estimation0003" class="quarto-xref">Figure&nbsp;13</a> depicts some residual analysis plots output by a <tt>gamlss</tt> object in <tt>R</tt>. The normalized quantile residuals seems sufficiently close to normality, hence we conclude the model exhibits a good fit, when we consider the training data solely.</p>
 <div class="cell" data-layout-align="center">
-<pre><code>#&gt; ******************************************************************
-#&gt;        Summary of the Quantile Residuals
-#&gt;                            mean   =  -0.00854049 
-#&gt;                        variance   =  1.00562 
-#&gt;                coef. of skewness  =  -0.03777219 
-#&gt;                coef. of kurtosis  =  3.586081 
-#&gt; Filliben correlation coefficient  =  0.9937032 
-#&gt; ******************************************************************</code></pre>
 <div class="cell-output-display">
 <div id="fig-estimation0003" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1433,56 +1422,53 @@ Figure&nbsp;13: Residual analysis plot generated by the <tt>gamlss</tt> object f
 </div>
 </div>
 </div>
+<p><a href="#fig-estimation0004" class="quarto-xref">Figure&nbsp;14</a> depicts again the residual analysis plots output by a <tt>gamlss</tt> object in <tt>R</tt>, constructed utilizing now the full data set, with <span class="math inline">\(K = 6\)</span>. The normalized quantile residuals seems less close to normality when compared to the previous residuals analysis plots seen in <a href="#fig-estimation0003" class="quarto-xref">Figure&nbsp;13</a>, exhibiting in particular a higher kurtosis.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="vignette0001_files/figure-html/estimation0004-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Residual analysis plot generated by the <tt>gamlss</tt> object for the complete data set.</figcaption>
+<div id="fig-estimation0004" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-estimation0004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="vignette0001_files/figure-html/fig-estimation0004-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation0004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14: Residual analysis plot generated by the <tt>gamlss</tt> object for the complete data set.
+</figcaption>
 </figure>
 </div>
 </div>
-<pre><code>#&gt; ******************************************************************
-#&gt;        Summary of the Quantile Residuals
-#&gt;                            mean   =  -0.01226872 
-#&gt;                        variance   =  0.9980133 
-#&gt;                coef. of skewness  =  0.0229834 
-#&gt;                coef. of kurtosis  =  4.399801 
-#&gt; Filliben correlation coefficient  =  0.9894296 
-#&gt; ******************************************************************</code></pre>
 </div>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="fu">smooth_estimates</span>(fit_total) </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> se <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">x =</span> (<span class="fl">1048.9899</span> <span class="sc">-</span> <span class="fl">851.0101</span>) <span class="sc">*</span> dabsorbance_matrix.tmat <span class="sc">+</span> <span class="fl">851.0101</span>,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> dabsorbance_matrix.omat) <span class="sc">|&gt;</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dabsorbance_matrix.tmat =</span> <span class="cn">NULL</span>,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">dabsorbance_matrix.omat =</span> <span class="cn">NULL</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>se <span class="sc">|&gt;</span> </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> y,</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">z =</span> .estimate)) <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>(<span class="fu">aes</span>(<span class="at">fill =</span> .estimate)) <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Wavelength "</span>, <span class="st">"(in "</span>, <span class="fu">italic</span>(<span class="st">"nm"</span>), <span class="st">")"</span>)),</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Smoothed "</span>,<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance"</span>)),,</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">850</span>, <span class="dv">900</span>, <span class="dv">930</span>, <span class="dv">950</span>, <span class="dv">1000</span>, <span class="dv">1050</span>),</span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"850"</span>, <span class="st">"900"</span>, <span class="st">"930"</span>, <span class="st">"950"</span>, <span class="st">"1000"</span>, <span class="st">"1050"</span>),</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">845</span>, <span class="dv">1055</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="fu">smooth_estimates</span>(fit_total, <span class="at">dist =</span> .<span class="dv">05</span>) </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(se) <span class="sc">+</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Wavelength "</span>, <span class="st">"(in "</span>, <span class="fu">italic</span>(<span class="st">"nm"</span>), <span class="st">")"</span>)),</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance"</span>)),,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">""</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">""</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">tag =</span> <span class="st">""</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"850"</span>, <span class="st">"950"</span>, <span class="st">"1050"</span>),</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.01169591</span>, <span class="fl">1.004762</span>)) <span class="sc">+</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"te("</span>,<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance,"</span>, <span class="fu">italic</span>(t), <span class="st">")"</span>))) <span class="sc">+</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Scale for fill is already present.</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adding another scale for fill, which will replace the existing scale.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1491,54 +1477,59 @@ Figure&nbsp;13: Residual analysis plot generated by the <tt>gamlss</tt> object f
 </figure>
 </div>
 </div>
-</div>
-<section id="transformations" class="level3">
-<h3 class="anchored" data-anchor-id="transformations">Transformations</h3>
-<p><span class="math display">\[
-  g^{-1}(\mu_i) = \beta_0 + \int^{1050}_{850} F\{s, T(D \chi_i(s))\} \; \text{d}s
-\]</span></p>
-<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tecator_data<span class="sc">$</span>normdabsorbance_matrix <span class="ot">=</span> tecator_data<span class="sc">$</span>dabsorbance_matrix</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span> <span class="sc">:</span> <span class="fu">ncol</span>(tecator_data<span class="sc">$</span>dabsorbance_matrix))</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  aux_dabsorbance <span class="ot">=</span> (tecator_data <span class="sc">|&gt;</span> <span class="fu">subset</span>(train <span class="sc">==</span> <span class="dv">1</span>))<span class="sc">$</span>dabsorbance_matrix[ , j ]</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span> <span class="sc">:</span> <span class="fu">nrow</span>(tecator_data<span class="sc">$</span>dabsorbance_matrix))</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    tecator_data<span class="sc">$</span>normdabsorbance_matrix[ i , j ] <span class="ot">=</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mean</span>(<span class="fu">pnorm</span>((tecator_data<span class="sc">$</span>dabsorbance_matrix[ i , j ] <span class="sc">-</span> aux_dabsorbance) <span class="sc">/</span> (<span class="fu">sd</span>(aux_dabsorbance))))</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normdabsorbance =</span> <span class="fu">tfd</span>(<span class="at">data =</span> normdabsorbance_matrix,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                               <span class="at">arg =</span> <span class="fu">attr</span>(tecator_data<span class="sc">$</span>normdabsorbance_matrix, <span class="st">"arg"</span>)))</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="sc">|&gt;</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> normdabsorbance,</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> fat20)) <span class="sc">+</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>se <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">.estimate =</span> <span class="fu">abs</span>(.estimate <span class="sc">/</span> .se <span class="sc">**</span> .<span class="dv">5</span>)) <span class="sc">|&gt;</span> <span class="fu">draw</span>() <span class="sc">+</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Wavelength "</span>, <span class="st">"(in "</span>, <span class="fu">italic</span>(<span class="st">"nm"</span>), <span class="st">")"</span>)),</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance"</span>)),,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">""</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">""</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">tag =</span> <span class="st">""</span>,</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">4</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"850"</span>, <span class="st">"930"</span>, <span class="st">"950"</span>, <span class="st">"1050"</span>),</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.01169591</span>, <span class="fl">1.004762</span>)) <span class="sc">+</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"te("</span>,<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance,"</span>, <span class="fu">italic</span>(t), <span class="st">")"</span>))) <span class="sc">+</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>,</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>                        <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Scale for fill is already present.</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adding another scale for fill, which will replace the existing scale.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="vignette0001_files/figure-html/transformation0001-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="vignette0001_files/figure-html/estimation0005-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="math display">\[
-  \hat{H}_t(x) = N^{-1}_{\text{train}}\sum_{i \in \text{train}}\Phi\Bigg(\frac{x - X_i(t)}{h(t)}\Bigg)
-\]</span></p>
-<p>where <span class="math inline">\(h(t)\)</span> is a tuning parameter, potentially dependent on <span class="math inline">\(t\)</span> - we will adopt <span class="math inline">\(h(t)\)</span> as the estimated square deviation function of the training data set.</p>
-<p><span class="math display">\[
-  \hat{G}_t(x) = N^{-1}\sum^N_{i=1}\textbf{1}_{(x, -\infty)}(\chi_i(t))
-\]</span></p>
-</section>
 </section>
 </section>
 <section id="concluding-remarks" class="level1">
 <h1>Concluding Remarks</h1>
-<p>Noticing.</p>
+<p>An additional approach suggested in <span class="citation" data-cites="mcLean:2014">McLean et al. (<a href="#ref-mcLean:2014" role="doc-biblioref">2014</a>)</span> is to transform our functional covariate before utilizing it in the FGAM model. In particular,</p>
+<p><span class="math display">\[
+  \hat{G}_t(x) = N^{-1}\sum^N_{i=1}\textbf{1}_{(x, -\infty)}(\chi_i(t))
+\]</span></p>
+<p><span class="math display">\[
+  \hat{H}_t(x) = N^{-1}_{\text{train}}\sum_{i \in \text{train}}\Phi\Bigg(\frac{x - X_i(t)}{h(t)}\Bigg)
+\]</span></p>
+<p>where <span class="math inline">\(h(t)\)</span> is a tuning parameter, potentially dependent on <span class="math inline">\(t\)</span>.</p>
 </section>
 <section id="references" class="level1">
 
