@@ -2,8 +2,7 @@
   {
     "listing": "/vignettes.html",
     "items": [
-      "/vignettes/ardRepresentation.html",
-      "/vignettes/tecatorRegression.html"
+      "/vignettes/ardRepresentation.html"
     ]
   },
   {
