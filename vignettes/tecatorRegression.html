@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Felipe Toledo Ferreira">
-<meta name="dcterms.date" content="2025-06-30">
-<meta name="description" content="I present some topics in functional regression utilizing the Tecator Infratec Analyzer dataset.">
+<meta name="dcterms.date" content="2025-07-01">
+<meta name="description" content="Some topics in functional regression presented utilizing the Tecator Infratec Analyzer dataset.">
 
 <title>Tecator Infratec Analyzer – Felipe Ferreira</title>
 <style>
@@ -160,10 +160,10 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="floating nav-fixed slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -179,11 +179,11 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../vignettes.html"> 
-<span class="menu-text"><tt style="background: #AD1519;">R</tt> Vignettes</span></a>
+<span class="menu-text"><tt style="background: #AD1519; color: white;">R</tt> Vignettes</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../solutions.html"> 
-<span class="menu-text">Exercise Solutions</span></a>
+<span class="menu-text">Solutions</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -193,12 +193,45 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Tecator Infratec Analyzer</h1>
+            <p class="subtitle lead">…a Vignette on Functional Data Analysis</p>
+                  <div>
+        <div class="description">
+          Some topics in functional regression presented utilizing the Tecator Infratec Analyzer dataset.
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://github.com/FelipeToledoFerreira">Felipe Toledo Ferreira</a> </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 1, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
@@ -220,59 +253,33 @@ window.Quarto = {
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Tecator Infratec Analyzer</h1>
-<p class="subtitle lead">…a Vignette on Functional Data Analysis</p>
-</div>
-
-<div>
-  <div class="description">
-    I present some topics in functional regression utilizing the Tecator Infratec Analyzer dataset.
-  </div>
-</div>
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p><a href="https://github.com/FelipeToledoFerreira">Felipe Toledo Ferreira</a> </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 30, 2025</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
 
 
-</header>
 
 
-<section id="introduction" class="level1">
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Last updated 2025/07/01.</p>
+</div></div><section id="introduction" class="level1 page-columns page-full">
 <h1>Introduction</h1>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <p>The Tecator Infratec Feed Analyzer data set (seen in <span class="citation" data-cites="ferraty:2006">Ferraty and Vieu (<a href="#ref-ferraty:2006" role="doc-biblioref">2006</a>)</span>), is composed of data recorded on a Tecator Infratec Food and Feed Analyzer tool, working in the wavelength range 850 - 1050<i>nm</i> by the Near Infrared Transmission (NIT) principle. Each sample (<span class="math inline">\(N = 215\)</span>) contains finely chopped pure meat with different moisture, fat and protein contents. For each meat sample the data consists of a 100 channel spectrum of absorbances and the contents of moisture (water), fat and protein. The absorbance is <span class="math inline">\(-\log_{10}\)</span> of the transmittance measured by the spectrometer. The three contents, measured in percent, are determined by analytic chemistry (click <a href="https://lib.stat.cmu.edu/datasets/tecator">here</a> for further details).</p>
 </section>
-<section id="setup" class="level2">
+<section id="setup" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>This vignette is primarily concerned with presenting a set of methods to perform functional regression, motivated by the Tecator Infratec Feed Analyzer dataset, and with computational tools provided by the <tt>R</tt> programming language. First, a number of packages must be downloaded and subsequently called. In particular, the ‘<a href="https://tidyfun.github.io/tidyfun/"><tt>tidyfun</tt></a>’ package must be downloaded remotely, as it is not yet available on <tt>CRAN</tt>. The following chunk performs this step:</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Show <tt>R</tt> code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"fda.usc"</span>)    <span class="do">## R package containing the 'tecator' dataset</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)  <span class="do">## R package for tidy data manipulation and visualization</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tf"</span>)         <span class="do">## R package for tidy functional data manipulation</span></span>
@@ -292,7 +299,7 @@ window.Quarto = {
 <p>The ‘<tt>tecator</tt>’ dataset is sourced from the <tt>fda.usc</tt> package (see <span class="citation" data-cites="bande:2012">Febrero-Bande and Oviedo de la Fuente (<a href="#ref-bande:2012" role="doc-biblioref">2012</a>)</span>). Noticeably, it is stored therein as a <tt>list</tt> object - this vignette converts this dataset to a <tt>data.frame</tt> object, via the tools made available on the <tt>tf</tt> package, which seeks to provide classes and methods for “Tidy Functional Data”, inspired by the greater existing <tt>tidyverse</tt> packages for data manipulation and visualization. The following chunk performs this conversion:</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Show <tt>R</tt> code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Importing the 'tecator' dataset</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(tecator)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Converting 'tecator' to df (data frame)</span></span>
@@ -313,11 +320,8 @@ window.Quarto = {
 </details>
 </div>
 <p><a href="#tbl-table0001" class="quarto-xref">Table&nbsp;1</a> illustrates how functional data is stored within a <tt>data.frame</tt> object through the implementation of the <tt>tf</tt> package - in particular, the <tt>absorbance</tt> column is stored as a <tt>tfd</tt> object, such that, to every row within the resulting data frame, there exists a corresponding functional observation.</p>
-<div id="tbl-table0001" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table0001-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Snapshot of the five first rows of the ‘<tt>tecator</tt>’ dataset. Note that the column labelled as ‘<tt>absorbance</tt>’ is composed of ‘<tt>tfd</tt>’ objects, from the ‘<tt>tidyfun</tt>’ <tt>R</tt> package.
-</figcaption>
+<div id="tbl-table0001" class="cell quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-tbl-cap-location="margin">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-table0001-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="cell caption-top table table-sm table-striped small">
 <thead>
@@ -368,20 +372,23 @@ Table&nbsp;1: Snapshot of the five first rows of the ‘<tt>tecator</tt>’ data
 </tbody>
 </table>
 </div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-table0001-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Snapshot of the five first rows of the ‘<tt>tecator</tt>’ dataset. Note that the column labelled as ‘<tt>absorbance</tt>’ is composed of ‘<tt>tfd</tt>’ objects, from the ‘<tt>tidyfun</tt>’ <tt>R</tt> package.
+</figcaption>
 </figure>
 </div>
 <hr>
 </section>
 </section>
-<section id="exploratory-data-analysis" class="level1">
+<section id="exploratory-data-analysis" class="level1 page-columns page-full">
 <h1>Exploratory Data Analysis</h1>
-<section id="fat-percentage" class="level2">
+<section id="fat-percentage" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="fat-percentage">Fat percentage</h2>
 <p>Expressly, the main goal of this application is to construct a predictive model for the fat percentage of the meat samples, utilizing corresponding absorbance curves as model covariates. For that purpose, first a simple exploratory analysis of the data must be performed, to allow for model elicitation. <a href="#fig-figures0001" class="quarto-xref">Figure&nbsp;1</a> and <a href="#tbl-table0002" class="quarto-xref">Table&nbsp;2</a> seen below provide a brief view of the distribution of the fat percentage. Hereafter, the observed values of fat percentage in the dataset may also be referred to as <span class="math inline">\(y_1,\ldots,y_{215}\)</span>, which is assumed to be sampled from a set of independent random variables <span class="math inline">\(Y_1,\ldots,Y_{215}\)</span> with unknown distribution.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>g01 <span class="ot">=</span> tecator<span class="sc">$</span>y <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Fat)) <span class="sc">+</span></span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb3" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>g01 <span class="ot">=</span> tecator<span class="sc">$</span>y <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Fat)) <span class="sc">+</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"cyan"</span>,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> .<span class="dv">25</span>,</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
@@ -429,24 +436,21 @@ Table&nbsp;1: Snapshot of the five first rows of the ‘<tt>tecator</tt>’ data
 <span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>)</span>
 <span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>g01 <span class="sc">+</span> g02</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0001" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0001" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0001-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0001-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0001-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0001-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0001-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Left panel: sample estimated density of the fat percentage. Right panel: sample boxplot of the fat percentage.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div id="tbl-table0002" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;2: Sample summary statistics of the fat percentage.
-</figcaption>
+<div id="tbl-table0002" class="cell quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-tbl-cap-location="margin">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-table0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="cell caption-top table table-sm table-striped small">
 <thead>
@@ -471,17 +475,20 @@ Table&nbsp;2: Sample summary statistics of the fat percentage.
 </tbody>
 </table>
 </div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-table0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Sample summary statistics of the fat percentage.
+</figcaption>
 </figure>
 </div>
 <p>Additionally, the sample skewness and kurtosis were computed as <span class="math inline">\(\widehat{\text{Skew}}(Y) \approx 0.802\)</span> and <span class="math inline">\(\widehat{\text{Kurt}}(Y) \approx 2.573\)</span>. As the data refers to a percentage value, its support is bounded on the interval <span class="math inline">\([0,100]\)</span>, which may be normalized to the unit interval <span class="math inline">\([0,1]\)</span> for computatibility purposes. As none of the observed values are at the boundaries <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span> (and it is reasonable to assume that no observation will attain this value), the fat percentage may likewise be assumed to belong to the strictly closed <span class="math inline">\((0,100)\)</span> interval. Generalized linear models may consequently be more appropriate to model this form of data, in particular for families with bounded support (e.g.: Beta regression).</p>
 </section>
-<section id="absorbance-curves" class="level2">
+<section id="absorbance-curves" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="absorbance-curves">Absorbance curves</h2>
 <p>The absorbance curve data, unlike the fat percentage data seen in the previous subsections, is composed of values obtainted discreetly by subjecting each of the meat samples to a spectrometric measuring device varying in the 850 - 1050<i>nm</i> wavelength range uniformly, with <span class="math inline">\(100\)</span> equal design points across all meat samples. This results in <span class="math inline">\(100 \cdot 215 = 21500\)</span> observations in total. <a href="#fig-figures0002" class="quarto-xref">Figure&nbsp;2</a> and <a href="#fig-figures0003" class="quarto-xref">Figure&nbsp;3</a> provide a brief analysis on the distribution of the data; the plotted data is composed of the raw (i.e.: not smoothed) data. As <a href="http://eio.usc.es/eipc1/BASE/BASEMASTER/FORMULARIOS-PHP-DPTO/REPORTS/report11_02.pdf">previous reports</a> have indicated the presence of an additional peak on the absorbance curves around the 930<i>nm</i> wavelength for meat samples with fat percentage superceding 20, the data are separated amongst these two groups.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g03 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb4" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g03 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> absorbance,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> fat20)) <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>() <span class="sc">+</span></span>
@@ -549,23 +556,23 @@ Table&nbsp;2: Sample summary statistics of the fat percentage.
 <span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> .<span class="dv">5</span>)</span>
 <span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>g03 <span class="sc">+</span> g04</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0002" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0002" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0002-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0002-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Left panel: spaghetti plot of the absorbance curves, separated by fat percentage. Right panel: mean absorbance curves, separated by fat percentage.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>g05 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> </span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb5" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>g05 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fat20) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">var_absorbance =</span> <span class="fu">var</span>(absorbance)) <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fat20 =</span> <span class="fu">factor</span>(fat20,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"20% &lt; Fat"</span>,</span>
@@ -641,13 +648,13 @@ Figure&nbsp;2: Left panel: spaghetti plot of the absorbance curves, separated by
 <span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>)</span>
 <span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>g05 <span class="sc">+</span> g06</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0003" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0003" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0003-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0003-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: Left panel: absorbance variance curves, separated by fat percentage. Right panel: correlogram of the absorbance curves.
 </figcaption>
 </figure>
@@ -655,11 +662,8 @@ Figure&nbsp;3: Left panel: absorbance variance curves, separated by fat percenta
 </div>
 </div>
 <p>From a modelling standpoint, the values obtained at each design point may be considered covariates <span class="math inline">\(x_{i,1},\ldots,x_{i,100}\)</span>, for <span class="math inline">\(i \in \{1,\ldots,215\}\)</span>, and as <span class="math inline">\(100 = p &lt; N = 215\)</span>, even a simple linear regression model is feasible. However, as evidenced in the Right panel of <a href="#fig-figures0003" class="quarto-xref">Figure&nbsp;3</a>, the data is highly correlated. Note that the minimum absolute correlation observed across the absorbance curves was <span class="math inline">\(\min_{i,j}\{\vert \rho_{i,j} \vert\} \approx 0.963\)</span>. This implies that, were the data applied indiscriminately in a simpler linear regression model, it would be subject to a significant amount of multicollinearity. Alternatively, each absorbance curve may be considered a functional covariate <span class="math inline">\(\chi_{1},\ldots,\chi_{215}\)</span>, which may be estimated by smoothing the discrete observed values, allowing for a more flexible form of high-dimensional modelling through <i>functional regression</i>. Adopting the purview of functional data analysis in this context also presents other advantages: functionals (i.e.: derivatives, integrals, etc.) of the data in question may likewise be explored. It is important to remark that the values of these functionals is dependent on the support of the data in question. The method ‘<tt>tf_derive()</tt>’, part of the ‘<tt>tf</tt>’ ‘<tt>R</tt>’ package, allows for the computation of the first-order derivative of the absorbance curves. <a href="#tbl-table0003" class="quarto-xref">Table&nbsp;3</a> provides a view of the inclusion of the derivative column.</p>
-<div id="tbl-table0003" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table0003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3: Comparisons of the ‘<tt>absorbance</tt>’ and ‘<tt>dabsorbance</tt>’ columns of the five first rows of the ‘<tt>tecator</tt>’ dataset. The column labelled as ‘<tt>dabsorbance</tt>’ is composed of ‘<tt>tfd</tt>’ objects, and represents the first order derivative of the ‘<tt>absorbance</tt>’ column, as computed via finite differences.
-</figcaption>
+<div id="tbl-table0003" class="cell quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-tbl-cap-location="margin">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
 <div aria-describedby="tbl-table0003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="cell caption-top table table-sm table-striped small">
 <colgroup>
@@ -703,13 +707,16 @@ Table&nbsp;3: Comparisons of the ‘<tt>absorbance</tt>’ and ‘<tt>dabsorbanc
 </tbody>
 </table>
 </div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-table0003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Comparisons of the ‘<tt>absorbance</tt>’ and ‘<tt>dabsorbance</tt>’ columns of the five first rows of the ‘<tt>tecator</tt>’ dataset. The column labelled as ‘<tt>dabsorbance</tt>’ is composed of ‘<tt>tfd</tt>’ objects, and represents the first order derivative of the ‘<tt>absorbance</tt>’ column, as computed via finite differences.
+</figcaption>
 </figure>
 </div>
 <p>As similarly seen in previous reports, the derivative of the absorbance curves is significantly different for meat samples with fat percentage greater than 20%, as illustrated by <a href="#fig-figures0004" class="quarto-xref">Figure&nbsp;4</a> and <a href="#fig-figures0005" class="quarto-xref">Figure&nbsp;5</a>. Unlike the usual absorbance curves, in this context the minimum absolute correlation observed across the derivatives of the absorbance curves is <span class="math inline">\(\min_{i,j}\{\vert \tilde{\rho}_{i,j} \vert\} \approx 0\)</span>. The <span class="math inline">\(D\)</span> symbol is adopted to denote the application of the derivative. Note, in the Right panel of <a href="#fig-figures0005" class="quarto-xref">Figure&nbsp;5</a>, that the correlogram presents a steep decrease in correlation between the 930<i>nm</i> and 950<i>nm</i> wavelengths. This corresponds to a steep valley in the mean function for the data with fat percentage greater than 20, as seen in the Right panel of <a href="#fig-figures0004" class="quarto-xref">Figure&nbsp;4</a>.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g07 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb6" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>g07 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> dabsorbance,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> fat20)) <span class="sc">+</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>() <span class="sc">+</span></span>
@@ -769,23 +776,23 @@ Table&nbsp;3: Comparisons of the ‘<tt>absorbance</tt>’ and ‘<tt>dabsorbanc
 <span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"orange"</span>, <span class="st">"red"</span>))</span>
 <span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>g07 <span class="sc">+</span> g08</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0004" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0004" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0004-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0004-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4: Left panel: spaghetti plot of the derivative of the absorbance curves, separated by fat percentage. Right panel: mean derivative of the absorbance curves, separated by fat percentage.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g09 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> </span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb7" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g09 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fat20) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">var_dabsorbance =</span> <span class="fu">var</span>(dabsorbance)) <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fat20 =</span> <span class="fu">factor</span>(fat20,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"20% &lt; Fat"</span>,</span>
@@ -860,13 +867,13 @@ Figure&nbsp;4: Left panel: spaghetti plot of the derivative of the absorbance cu
 <span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>)</span>
 <span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>g09 <span class="sc">+</span> g10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0005" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0005" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0005-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0005-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0005-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0005-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0005-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5: Left panel: variance of the derivative of the absorbance curves, separated by fat percentage. Right panel: correlogram of the derivative of the absorbance curves.
 </figcaption>
 </figure>
@@ -874,10 +881,10 @@ Figure&nbsp;5: Left panel: variance of the derivative of the absorbance curves, 
 </div>
 </div>
 <p>An usual problem when dealing with multivariate data is that, in the absence of greater context, there is no singular approach to determining a ranking of observations. This is also true of functional data, hence there is no specific way to determine functional quantiles, nor a universal definition of a functional outlier. <span class="citation" data-cites="pintado:2009">López-Pintado and Romo (<a href="#ref-pintado:2009" role="doc-biblioref">2009</a>)</span> defines a form of functional depth, which allows for the computation of the functional median (as well as other quantiles), a work which was latter expanded in <span class="citation" data-cites="sun:2011">Sun and Genton (<a href="#ref-sun:2011" role="doc-biblioref">2011</a>)</span>, wherein the procedure to construct a functional boxplot was delineated, allowing also for outlier detection. The computational implementation of functional boxplots is available in the ‘<tt>fda</tt>’ package for the <tt>R</tt> programming language, as part of the method <tt>fbplot()</tt>. Moreover, the computation of the functional depth developed in <span class="citation" data-cites="pintado:2009">López-Pintado and Romo (<a href="#ref-pintado:2009" role="doc-biblioref">2009</a>)</span> is available in the <tt>tf</tt> package through the <tt>tf_depth()</tt> method. <a href="#fig-figures0006" class="quarto-xref">Figure&nbsp;6</a> displays functional boxplots of the absorbance curves, as well as their corresponding derivatives. Interesting insights may be gleaned with respect to manner in which functional depth detects outliers: in the first boxplot the observations <span class="math inline">\(43\)</span>, <span class="math inline">\(44\)</span>, <span class="math inline">\(99\)</span>, <span class="math inline">\(140\)</span> and <span class="math inline">\(185\)</span> are classified as outliers, whilst for the second boxplot, only the observation <span class="math inline">\(140\)</span> is classified as an outlier. This is a sensible result, as it may be observed that the outlier observations in the former plot present significant vertical shift with respect to the median curves, and the first order derivative of a function is invariant with respect to any constant term (i.e., any constant vertical shift), hence the application of the derivative ‘<it>standardizes</it>’ the absorbance curves. <a href="#fig-figures0007" class="quarto-xref">Figure&nbsp;7</a> enhances previous plots seen in <a href="#fig-figures0002" class="quarto-xref">Figure&nbsp;2</a> and <a href="#fig-figures0004" class="quarto-xref">Figure&nbsp;4</a> by highlighting outlier curves. As previously stated, the outlier curves for the absorbance curves possess significant vertical shift ‘upwards’, i.e., they are consistently greater than the mass of functional data, but also present a similar overall ‘shape’. By contrast, the sole outlier for the derivative of the absorbance curves presents more complex behaviour, initially being greater than the mass of functional data, and crossing over so that it is lesser. We note, from <a href="#fig-figures0008" class="quarto-xref">Figure&nbsp;8</a>, that the functional mean and median are very similar in the case of the derivative of the absorbance curves, whilst for the absorbance curves themselves there is indication of positive skewness, particularly for curves whose corresponding meat sample has more than 20% of fat.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb8" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tecator_data<span class="sc">$</span>absorbance <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>(<span class="at">byrow =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">t</span>() <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fbplot</span>(<span class="at">xlab =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Wavelength (in "</span>,<span class="fu">italic</span>(<span class="st">"nm"</span>),<span class="st">")"</span>)),</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ylab =</span> <span class="fu">substitute</span>(<span class="st">"Absorbance"</span>),</span>
@@ -927,23 +934,23 @@ Figure&nbsp;5: Left panel: variance of the derivative of the absorbance curves, 
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>     <span class="at">las =</span> <span class="dv">1</span>,</span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.axis =</span> .<span class="dv">75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0006" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0006" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0006-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0006-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0006-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0006-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0006-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6: Upper panel: functional boxplots of the absorbance curves. Lower panel: functional boxplots of the derivative of the absorbance curves.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>g11 <span class="ot">=</span> g03</span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb9" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>g11 <span class="ot">=</span> g03</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>g11<span class="sc">$</span>data <span class="ot">=</span> g11<span class="sc">$</span>data[ <span class="sc">-</span> <span class="fu">c</span>(<span class="dv">43</span>, <span class="dv">44</span>, <span class="dv">140</span>, <span class="dv">99</span>, <span class="dv">185</span>) , ]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>g11 <span class="ot">=</span> g11 <span class="sc">+</span> tecator_data[ <span class="fu">c</span>(<span class="dv">43</span>, <span class="dv">44</span>, <span class="dv">99</span>, <span class="dv">185</span>) , ] <span class="sc">|&gt;</span> </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> absorbance),</span>
@@ -958,23 +965,23 @@ Figure&nbsp;6: Upper panel: functional boxplots of the absorbance curves. Lower 
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col =</span> <span class="st">"black"</span>)</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>g11 <span class="sc">+</span> g12</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0007" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0007" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0007-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0007-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0007-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0007-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0007-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;7: Upper panel: spaghetti plot of the absorbance curves, separated by fat percentage, with outlier curves highlighted in black; observation <span class="math inline">\(140\)</span> is likewise dashed. Lower panel: spaghetti plot of the derivative of the absorbance curves, separated by fat percentage, with outlier curves highlighted in black.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>g04 <span class="ot">=</span> g04 <span class="sc">+</span> tecator_data <span class="sc">|&gt;</span> </span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb10" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>g04 <span class="ot">=</span> g04 <span class="sc">+</span> tecator_data <span class="sc">|&gt;</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fat20) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">median_absorbance =</span> <span class="fu">median</span>(absorbance)) <span class="sc">|&gt;</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fat20 =</span> <span class="fu">factor</span>(fat20,</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"20% &lt; Fat"</span>,</span>
@@ -1000,13 +1007,13 @@ Figure&nbsp;7: Upper panel: spaghetti plot of the absorbance curves, separated b
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                 <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>g04 <span class="sc">+</span> g08</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0008" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0008" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0008-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0008-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0008-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0008-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0008-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8: Upper panel: mean and median absorbance curves, separated by fat percentage, represented respectively by solid and dashed curves. Lower panel: mean and median derivative of the absorbance curves, separated by fat percentage, represented respectively by solid and dashed curves.
 </figcaption>
 </figure>
@@ -1014,10 +1021,10 @@ Figure&nbsp;8: Upper panel: mean and median absorbance curves, separated by fat 
 </div>
 </div>
 <p>Note that <a href="#fig-figures0002" class="quarto-xref">Figure&nbsp;2</a>, <a href="#fig-figures0003" class="quarto-xref">Figure&nbsp;3</a> and <a href="#fig-figures0004" class="quarto-xref">Figure&nbsp;4</a> display the <it>raw</it> absorbance curves (and corresponding derivatives), that is, we employ no smoothing techniques in those displays. This is feasible for this particular data set due to the fact that the absorbance curves (and corresponding derivatives) are contaminated by very little noise. The method <tt>tfb()</tt>, of the ‘<tt>tidyfun</tt>’ allows us to represent variables originally stored as <tt>tfd</tt> objects, ideal for raw functional data, to variables stored as <tt>tfb</tt> functional data, which is ideal for representing functional data as a linear combination of a finite number of basis functions; this is done by an interface with methods on the ‘<tt>mgcv</tt>’ <tt>R</tt> package. In particular, we will smooth the usual absorbance curves utilizing <span class="math inline">\(K = 15\)</span> B-spline basis, whilst the derivatives of the absorbance curves will be smoothed utilizing <span class="math inline">\(K = 30\)</span> B-spline basis. The results are presented in Figures <a href="#fig-figures0009" class="quarto-xref">Figure&nbsp;9</a> and <a href="#fig-figures0010" class="quarto-xref">Figure&nbsp;10</a>. Whilst certain distinctions are visible between the raw and smoothed data, it is apparent that the smoothed data provides a reasonable approximation to the sampled curves. Moreover, we note that the <tt>tfb()</tt> method itself provides a diagnostic with respect to the amount of variability preserved in the basis representation (which is ommited in the present study, but is exhibited by setting the argument <tt>verbose = TRUE</tt>): for both generated <tt>tfb</tt> objects the basis representations preserve a minimum of <span class="math inline">\(99.8\%\)</span> variability. We may now proceed to studying the functional regression problem.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">absorbance_basis =</span> <span class="fu">tfb</span>(absorbance,</span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb11" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">absorbance_basis =</span> <span class="fu">tfb</span>(absorbance,</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                                                             <span class="at">basis =</span> <span class="st">"spline"</span>,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                                             <span class="at">bs =</span> <span class="st">"bs"</span>,</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                                                             <span class="at">k =</span> <span class="dv">15</span>,</span>
@@ -1057,23 +1064,23 @@ Figure&nbsp;8: Upper panel: mean and median absorbance curves, separated by fat 
 <span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> .<span class="dv">5</span>)</span>
 <span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>g03 <span class="sc">+</span> g13</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0009" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0009" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0009-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0009-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0009-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0009-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0009-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;9: Left panel: raw absorbance curves. Right panel: smoothed absorbance curves.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>g14 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb12" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>g14 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> dabsorbance_basis,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> fat20)) <span class="sc">+</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>() <span class="sc">+</span></span>
@@ -1099,23 +1106,24 @@ Figure&nbsp;9: Left panel: raw absorbance curves. Right panel: smoothed absorban
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"orange"</span>))</span>
 <span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>g07 <span class="sc">+</span> g14</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0010" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0010" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0010-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0010-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0010-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0010-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0010-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10: Left panel: raw derivative of the absorbance curves. Right panel: smoothed derivative of the absorbance curves.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>Ultimately, as the observed functions are sufficiently regular, the functional regression models applied in the following section were constructed utilizing the raw absorbance curves as predictors, and this exploration was mostly illustrative.</p>
 <hr>
 </section>
 </section>
-<section id="functional-regression" class="level1">
+<section id="functional-regression" class="level1 page-columns page-full">
 <h1>Functional Regression</h1>
 <p>For this present data set we will consider two possible models for the relationship between the mean fat percentage of sampled meats and their corresponding absorbance curves, given as follows</p>
 <p><span id="eq-modelI"><span class="math display">\[
@@ -1124,10 +1132,10 @@ Figure&nbsp;10: Left panel: raw derivative of the absorbance curves. Right panel
   \mu_i =  \mathbb{E}[Y_i \vert \chi_i] = g\Bigg\{\!\beta_0 + \!\!\int^{1050}_{850} F\{s,D \chi_i(s)\} \; \text{d}s\!\Bigg\}
 \tag{2}\]</span></span></p>
 <p><a href="#eq-modelI" class="quarto-xref">Equation&nbsp;1</a> corresponds to the usual form of a Generalized Functional Linear Model (GFLM), whilst <a href="#eq-modelII" class="quarto-xref">Equation&nbsp;2</a> corresponds to a more complex model, the Functional Generalized Additive Model (FGAM)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, as seen in <span class="citation" data-cites="mcLean:2014">McLean et al. (<a href="#ref-mcLean:2014" role="doc-biblioref">2014</a>)</span>. Both of these models are implemented on the ‘<tt>refund</tt>’ <tt>R</tt> package (see <span class="citation" data-cites="goldsmith:2024">Goldsmith et al. (<a href="#ref-goldsmith:2024" role="doc-biblioref">2024</a>)</span>), under the <tt>pfr()</tt> and <tt>fgam()</tt> methods, respectively. This form of functional regression problem, wherein the response variable is a scalar variable and the predictors are functions, is referred to as scalar-on-function (SoF) regression. For both models to be studied presently, we will take <span class="math inline">\(Y_i \sim \text{Beta}(\mu_i,\phi)\)</span>, with mean as in <a href="#eq-modelI" class="quarto-xref">Equation&nbsp;1</a> or <a href="#eq-modelII" class="quarto-xref">Equation&nbsp;2</a>, and deviation <span class="math inline">\(\phi &gt; 0\)</span>. In order to better diagnose the proposed models, we will split the data set into a training set, composed of <span class="math inline">\(N_\text{train} = 108\)</span> observations, and a test data set, composed of <span class="math inline">\(N_\text{test} = 107\)</span> observations.</p>
-<div class="cell" data-layout-align="center">
+<div class="cell page-columns page-full" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">747</span>)</span>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb13" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">747</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="fu">nrow</span>(tecator_data)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>prop_train <span class="ot">=</span> .<span class="dv">5</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="sc">%&lt;&gt;%</span></span>
@@ -1186,24 +1194,129 @@ Figure&nbsp;10: Left panel: raw derivative of the absorbance curves. Right panel
 <span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"orange"</span>))</span>
 <span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>g15 <span class="sc">+</span> g16</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-figures0011" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-figures0011" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-figures0011-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-figures0011-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+<img src="tecatorRegression_files/figure-html/fig-figures0011-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-figures0011-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-figures0011-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;11: Left panel: smoothed absorbance curves on the training set. Right panel: smoothed absorbance curves on the test set.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<section id="generalized-functional-linear-model" class="level2">
+<section id="generalized-functional-linear-model" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="generalized-functional-linear-model">Generalized Functional Linear Model</h2>
-<p>Noticing.</p>
+<p>For the GFLM, we rewrite the linear term <span class="math inline">\(\beta_1(\cdot)\)</span> in <a href="#eq-modelI" class="quarto-xref">Equation&nbsp;1</a> as a one-dimensional basis expansion of <span class="math inline">\(K\)</span> cubic spline (wherein other basis expansions are also available), such that: <span class="math display">\[
+  \beta_1(s) = \sum^K_{j = 1} \theta_j \textbf{B}_{j}(t).
+\]</span> Hence, we rewrite the inverse of the link function applied to the mean <span class="math inline">\(\mu_i\)</span> as <span class="math display">\[
+g^{-1}(\mu_i) = \beta_0 + \int^{1050}_{850} \beta_1(s) D \chi_i(s) \; \text{d}s = \beta_0 + \sum^K_{j = 1}\theta_j Z_{j}(i),
+\]</span> where <span class="math display">\[
+  Z_j(i) = \int^{1050}_{850} \beta_1(s) D \chi_i(s) \; \text{d}s.
+\]</span> Thus, we essentially reduce the infinite-dimensional problem of estimating <span class="math inline">\(\beta_1(\cdot)\)</span> into a finite-dimensional problem of estimating the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\mathbf{\theta}\)</span>. In this context, there are a number of configurations to be determined, which include</p>
+<ul>
+<li>The number of components <span class="math inline">\(K\)</span> for <span class="math inline">\(\beta_1(t)\)</span>;</li>
+<li>The link function <span class="math inline">\(g(\cdot)\)</span> to be adopted;</li>
+<li>The family adopted in the fitting procedure;</li>
+</ul>
+<p>amongst other settings. For <span class="math inline">\(K\)</span>, we selected <span class="math inline">\(K = 30\)</span>, as for <span class="math inline">\(K &gt; 30\)</span> the estimates <span class="math inline">\(\hat{\beta}_1(t)\)</span> present little variation. The link function was chosen as <tt>probit</tt>, albeit similar to the tuning of <span class="math inline">\(K\)</span>, there were very small diferences when comapared to the other link functions. Lastly, as alluded to previously on the exploratory data analysis step, we choose to consider the response variable as Beta distributed. <a href="#fig-estimation0001" class="quarto-xref">Figure&nbsp;12</a> exhibits the resulting residual analysis which is obtained (utilizing the <tt>appraise()</tt> method from the <tt>gratia</tt> <tt>R</tt> package): note the presence of a pattern on the residuals versus linear predictor plot.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb14" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">dabsorbance_matrix =</span> dabsorbance <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>(),</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fat =</span> fat <span class="sc">/</span> <span class="dv">100</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>temporary_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">train =</span> <span class="dv">1</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>fit_ideal <span class="ot">=</span> temporary_data <span class="sc">%&gt;%</span> <span class="fu">pfr</span>(<span class="at">data =</span> .,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">formula =</span> fat <span class="sc">~</span> <span class="fu">lf</span>(<span class="at">X =</span> dabsorbance_matrix,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                                      <span class="at">argvals =</span> <span class="fu">attr</span>(dabsorbance_matrix, <span class="st">"arg"</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                                                      <span class="at">bs =</span> <span class="st">"cr"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                                                      <span class="at">k =</span> <span class="dv">30</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">method =</span> <span class="st">"REML"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">"probit"</span>),</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">fitter =</span> <span class="st">"gam"</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">appraise</span>(fit_ideal) <span class="sc">&amp;</span> <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-estimation0001" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-estimation0001-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="tecatorRegression_files/figure-html/fig-estimation0001-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-estimation0001-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Residual analysis plot generated via the <tt>appraise()</tt> method for the training data set.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full" data-layout-align="center">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb15" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fit_ideal) <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sup_value =</span> value <span class="sc">+</span> <span class="fu">qnorm</span>(.<span class="dv">95</span>) <span class="sc">*</span> se,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">inf_value =</span> value <span class="sc">+</span> <span class="fu">qnorm</span>(.<span class="dv">05</span>) <span class="sc">*</span> se) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> dabsorbance_matrix.argvals,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Wavelength "</span>, <span class="st">"(in "</span>, <span class="fu">italic</span>(<span class="st">"nm"</span>), <span class="st">")"</span>)),</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(beta[<span class="dv">1</span>], <span class="st">"("</span>, <span class="fu">italic</span>(<span class="st">"t"</span>), <span class="st">")"</span>))) <span class="sc">+</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F,</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> dabsorbance_matrix.argvals,</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> sup_value),</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F,</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> dabsorbance_matrix.argvals,</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> inf_value),</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">25</span>, .<span class="dv">5</span>, .<span class="dv">75</span>, <span class="dv">1</span>),</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"850"</span>, <span class="st">"900"</span>, <span class="st">"950"</span>, <span class="st">"1000"</span>, <span class="st">"1050"</span>),</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-estimation0002" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-estimation0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="tecatorRegression_files/figure-html/fig-estimation0002-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-estimation0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Estimated <span class="math inline">\(\hat{\beta}_1(t)\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="functional-generalized-additive-model" class="level2">
+<section id="functional-generalized-additive-model" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="functional-generalized-additive-model">Functional Generalized Additive Model</h2>
 <p>Before applying it, we will present some aspects of the FGAM model, as seen in <span class="citation" data-cites="mcLean:2014">McLean et al. (<a href="#ref-mcLean:2014" role="doc-biblioref">2014</a>)</span>. First, we rewrite the functional additive term in the form of a tensor product expansion of two marginal cubic spline functions (other basis expansions are also available), of orders <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span>, as follows: <span class="math display">\[
   F\{t, D \chi_i(t)\} = \sum^{K_1}_{j_1 = 1}\sum^{K_2}_{j_2 = 1}\theta_{j_1,j_2} \textbf{B}_{1,j_1}(t) \textbf{B}_{2,j_2}(D \chi_i (t)).
@@ -1211,13 +1324,13 @@ Figure&nbsp;11: Left panel: smoothed absorbance curves on the training set. Righ
   g^{-1}(\mu_i) = \beta_0 + \!\!\int^{1050}_{850} F\{s,D \chi_i(s)\} \; \text{d}s = \beta_0 + \sum^{K_1}_{j_1 = 1}\sum^{K_2}_{j_2 = 1} \theta_{j_1,j_2}Z_{j_1,j_2}(i),
 \]</span> where <span class="math display">\[
   Z_{j_1,j_2}(i) = \!\!\int^{1050}_{850}  \textbf{B}_{1,j_1}(s) \textbf{B}_{2,j_2}(D \chi_i (s)) \; \text{d}s.
-\]</span> That is, we have reduced the infinite-dimensional problem of estimating <span class="math inline">\(F\{\cdot,\cdot\}\)</span> into a finite-dimensional estimating problem where we seek to determine the parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\mathbf{\theta}\)</span>, for example, via restricted maximum likelihood methods. There are a panoply of settings to be tuned when estimating an FGAM, such as:</p>
+\]</span> That is, similarly to the GFLM, we have reduced the infinite-dimensional problem of estimating <span class="math inline">\(F\{\cdot,\cdot\}\)</span> into a finite-dimensional estimating problem where we seek to determine the parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\mathbf{\theta}\)</span>, for example, via restricted maximum likelihood methods. There are a panoply of settings to be tuned when estimating an FGAM, such as:</p>
 <ul>
 <li>The number of components <span class="math inline">\(K_1\)</span> and <span class="math inline">\(K_2\)</span> on the functional additive term;</li>
 <li>The link function <span class="math inline">\(g(\cdot)\)</span> to be adopted;</li>
 <li>The family adopted in the fitting procedure;</li>
 </ul>
-<p>amongst others. The third setting was alluded to previously when presenting the analysis of the Fat percentage data, wherein we observed that a distribution family of bounded support is ideal for the response variable, hence we will adopt the Beta regression framework. With respect to the link function, we determined, via residual analysis, that the <tt>probit</tt> link function results in the best fit (when comapared to the <tt>cloglog</tt>, <tt>cauchit</tt> and <tt>logit</tt> link functions). For the number of components on the functional additive term, we defined <span class="math inline">\(K_1 = K_2 = K\)</span>, and visually examined the predictive behavior of the models for <span class="math inline">\(K \in \{1,2,\ldots,10\}\)</span>. <a href="#fig-estimation0002" class="quarto-xref">Figure&nbsp;12</a> exhibits fitted versus true values, separated by training data and test data, for <span class="math inline">\(K \in \{5,6,7\}\)</span>. We note that the model with <span class="math inline">\(K = 6\)</span> presents less variability than the model with <span class="math inline">\(K = 5\)</span>, however the distinction between the model with <span class="math inline">\(K = 6\)</span> and <span class="math inline">\(K = 7\)</span> is less apparent. Likewise, we find that the change in estimate variability is similar through <span class="math inline">\(K &gt; 6\)</span>. Therefore, we likewise determined the ideal number of components via residuals analysis as <span class="math inline">\(K = 6\)</span>.</p>
+<p>amongst others. The third setting was alluded to previously when presenting the analysis of the Fat percentage data, wherein we observed that a distribution family of bounded support is ideal for the response variable, hence we will adopt the Beta regression framework. With respect to the link function, we determined, via residual analysis, that the <tt>probit</tt> link function results in the best fit (when comapared to the <tt>cloglog</tt>, <tt>cauchit</tt> and <tt>logit</tt> link functions). For the number of components on the functional additive term, we defined <span class="math inline">\(K_1 = K_2 = K\)</span>, and visually examined the predictive behavior of the models for <span class="math inline">\(K \in \{1,2,\ldots,10\}\)</span>. <a href="#fig-estimation0002" class="quarto-xref">Figure&nbsp;13</a> exhibits fitted versus true values, separated by training data and test data, for <span class="math inline">\(K \in \{5,6,7\}\)</span>. We note that the model with <span class="math inline">\(K = 6\)</span> presents less variability than the model with <span class="math inline">\(K = 5\)</span>, however the distinction between the model with <span class="math inline">\(K = 6\)</span> and <span class="math inline">\(K = 7\)</span> is less apparent. Likewise, we find that the change in estimate variability is similar through <span class="math inline">\(K &gt; 6\)</span>. Therefore, we likewise determined the ideal number of components via residuals analysis as <span class="math inline">\(K = 6\)</span>.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="On estimating the deviation parameter">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1239,177 +1352,175 @@ On estimating the deviation parameter
 </div>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">dabsorbance_matrix =</span> dabsorbance <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>(),</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">fat =</span> fat <span class="sc">/</span> <span class="dv">100</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>theta_initial <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>max_iterations <span class="ot">=</span> <span class="dv">25</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>theta_underfit <span class="ot">=</span> <span class="fu">numeric</span>(max_iterations)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>theta_overfit <span class="ot">=</span> <span class="fu">numeric</span>(max_iterations)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>theta_ideal <span class="ot">=</span> <span class="fu">numeric</span>(max_iterations)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>theta_underfit[<span class="dv">1</span>] <span class="ot">=</span> theta_initial</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>theta_overfit[<span class="dv">1</span>] <span class="ot">=</span> theta_initial</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>theta_ideal[<span class="dv">1</span>] <span class="ot">=</span> theta_initial</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>iteration <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(iteration <span class="sc">&lt;</span> max_iterations)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  fit_underfit <span class="ot">=</span> <span class="fu">fgam</span>(<span class="at">formula =</span> fat <span class="sc">~</span> <span class="fu">af</span>(<span class="at">X =</span> dabsorbance_matrix,</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">basistype =</span> <span class="st">"te"</span>,</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">bs =</span> <span class="st">"cr"</span>,</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)),</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fitter =</span> <span class="st">"gam"</span>,</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">"probit"</span>,</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">theta =</span> theta_underfit[ iteration ]),</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tensortype =</span> <span class="st">"te"</span>,</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> tecator_data,</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weights =</span> tecator_data<span class="sc">$</span>train,</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>                      <span class="at">method =</span> <span class="st">"REML"</span>)</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  fit_overfit <span class="ot">=</span> <span class="fu">fgam</span>(<span class="at">formula =</span> fat <span class="sc">~</span> <span class="fu">af</span>(<span class="at">X =</span> dabsorbance_matrix,</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">basistype =</span> <span class="st">"te"</span>,</span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">bs =</span> <span class="st">"cr"</span>,</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">7</span>)),</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fitter =</span> <span class="st">"gam"</span>,</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>                     <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">"probit"</span>,</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">theta =</span> theta_overfit[ iteration ]),</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tensortype =</span> <span class="st">"te"</span>,</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> tecator_data,</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>                     <span class="at">weights =</span> tecator_data<span class="sc">$</span>train,</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method =</span> <span class="st">"REML"</span>)</span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  fit_ideal <span class="ot">=</span> <span class="fu">fgam</span>(<span class="at">formula =</span> fat <span class="sc">~</span> <span class="fu">af</span>(<span class="at">X =</span> dabsorbance_matrix,</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">basistype =</span> <span class="st">"te"</span>,</span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">bs =</span> <span class="st">"cr"</span>,</span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">6</span>)),</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fitter =</span> <span class="st">"gam"</span>,</span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>                   <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">"probit"</span>,</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">theta =</span> theta_ideal[ iteration ]),</span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tensortype =</span> <span class="st">"te"</span>,</span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> tecator_data,</span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weights =</span> tecator_data<span class="sc">$</span>train,</span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">"REML"</span>)</span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>  tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fat_under =</span> fit_underfit<span class="sc">$</span>fitted.values,</span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>         <span class="at">fat_over =</span> fit_overfit<span class="sc">$</span>fitted.values,</span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>         <span class="at">fat_ideal =</span> fit_ideal<span class="sc">$</span>fitted.values)</span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>  temporary_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">subset</span>(train <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>  diag_underfit <span class="ot">=</span></span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gamlss</span>(<span class="at">formula =</span> fat <span class="sc">~-</span><span class="dv">1</span>,</span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="fu">BE</span>(<span class="at">mu.link =</span> <span class="st">"identity"</span>,</span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sigma.link =</span> <span class="st">"identity"</span>),</span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.start =</span> temporary_data<span class="sc">$</span>fat_under,</span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.fix =</span> T,</span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> temporary_data,</span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>           <span class="at">trace =</span> F)</span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>  diag_overfit <span class="ot">=</span></span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gamlss</span>(<span class="at">formula =</span> fat <span class="sc">~-</span><span class="dv">1</span>,</span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="fu">BE</span>(<span class="at">mu.link =</span> <span class="st">"identity"</span>,</span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sigma.link =</span> <span class="st">"identity"</span>),</span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.start =</span> temporary_data<span class="sc">$</span>fat_over,</span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.fix =</span> T,</span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> temporary_data,</span>
-<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>           <span class="at">trace =</span> F)</span>
-<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>  diag_ideal <span class="ot">=</span></span>
-<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gamlss</span>(<span class="at">formula =</span> fat <span class="sc">~-</span><span class="dv">1</span>,</span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="fu">BE</span>(<span class="at">mu.link =</span> <span class="st">"identity"</span>,</span>
-<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sigma.link =</span> <span class="st">"identity"</span>),</span>
-<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.start =</span> temporary_data<span class="sc">$</span>fat_ideal,</span>
-<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.fix =</span> T,</span>
-<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> temporary_data,</span>
-<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>           <span class="at">trace =</span> F)</span>
-<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>  theta_underfit[ iteration <span class="sc">+</span> <span class="dv">1</span> ] <span class="ot">=</span> (<span class="dv">1</span> <span class="sc">-</span> diag_underfit<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (diag_underfit<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>)</span>
-<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>  theta_overfit[ iteration <span class="sc">+</span> <span class="dv">1</span> ] <span class="ot">=</span> (<span class="dv">1</span> <span class="sc">-</span> diag_overfit<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (diag_overfit<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>)</span>
-<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>  theta_ideal[ iteration <span class="sc">+</span> <span class="dv">1</span> ] <span class="ot">=</span> (<span class="dv">1</span> <span class="sc">-</span> diag_ideal<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (diag_ideal<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>)</span>
-<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>  iteration <span class="ot">=</span> iteration <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>g17 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">select</span>(fat_under, fat_over, fat_ideal, fat, train) <span class="sc">|&gt;</span></span>
-<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">melt</span>(<span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">"fat"</span>,</span>
-<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"train"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> value,</span>
-<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>         <span class="at">model =</span> <span class="fu">sapply</span>(<span class="at">X =</span> <span class="fu">as.character</span>(variable),</span>
-<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">switch</span>,</span>
-<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"fat_under"</span> <span class="ot">=</span> <span class="st">"K = 5"</span>,</span>
-<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"fat_over"</span> <span class="ot">=</span> <span class="st">"K = 7"</span>,</span>
-<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"fat_ideal"</span> <span class="ot">=</span> <span class="st">"K = 6"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>           <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"K = 5"</span>,</span>
-<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"K = 6"</span>,</span>
-<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"K = 7"</span>)),</span>
-<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>         <span class="at">train =</span> <span class="fu">factor</span>(<span class="at">x =</span> <span class="fu">ifelse</span>(<span class="at">test =</span> train <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Train"</span>, <span class="st">"Test"</span>),</span>
-<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Train"</span>, <span class="st">"Test"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="cn">NULL</span>,</span>
-<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>         <span class="at">variable =</span> <span class="cn">NULL</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> fitted,</span>
-<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> fat,</span>
-<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> train)) <span class="sc">+</span></span>
-<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
-<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
-<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
-<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
-<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
-<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
-<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
-<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
-<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
-<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fitted"</span>,</span>
-<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"True"</span>,</span>
-<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
-<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>),</span>
-<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>),</span>
-<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>,</span>
-<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a>              <span class="at">intercept =</span> <span class="dv">0</span>,</span>
-<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(model))</span>
-<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>g17</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>theta_initial <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>max_iterations <span class="ot">=</span> <span class="dv">25</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>theta_underfit <span class="ot">=</span> <span class="fu">numeric</span>(max_iterations)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>theta_overfit <span class="ot">=</span> <span class="fu">numeric</span>(max_iterations)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>theta_ideal <span class="ot">=</span> <span class="fu">numeric</span>(max_iterations)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>theta_underfit[<span class="dv">1</span>] <span class="ot">=</span> theta_initial</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>theta_overfit[<span class="dv">1</span>] <span class="ot">=</span> theta_initial</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>theta_ideal[<span class="dv">1</span>] <span class="ot">=</span> theta_initial</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>iteration <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(iteration <span class="sc">&lt;</span> max_iterations)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  fit_underfit <span class="ot">=</span> <span class="fu">fgam</span>(<span class="at">formula =</span> fat <span class="sc">~</span> <span class="fu">af</span>(<span class="at">X =</span> dabsorbance_matrix,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">basistype =</span> <span class="st">"te"</span>,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">bs =</span> <span class="st">"cr"</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)),</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fitter =</span> <span class="st">"gam"</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>                      <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">"probit"</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">theta =</span> theta_underfit[ iteration ]),</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tensortype =</span> <span class="st">"te"</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> tecator_data,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weights =</span> tecator_data<span class="sc">$</span>train,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>                      <span class="at">method =</span> <span class="st">"REML"</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  fit_overfit <span class="ot">=</span> <span class="fu">fgam</span>(<span class="at">formula =</span> fat <span class="sc">~</span> <span class="fu">af</span>(<span class="at">X =</span> dabsorbance_matrix,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">basistype =</span> <span class="st">"te"</span>,</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">bs =</span> <span class="st">"cr"</span>,</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">7</span>)),</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fitter =</span> <span class="st">"gam"</span>,</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>                     <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">"probit"</span>,</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">theta =</span> theta_overfit[ iteration ]),</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tensortype =</span> <span class="st">"te"</span>,</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> tecator_data,</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>                     <span class="at">weights =</span> tecator_data<span class="sc">$</span>train,</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>                     <span class="at">method =</span> <span class="st">"REML"</span>)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>  fit_ideal <span class="ot">=</span> <span class="fu">fgam</span>(<span class="at">formula =</span> fat <span class="sc">~</span> <span class="fu">af</span>(<span class="at">X =</span> dabsorbance_matrix,</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">basistype =</span> <span class="st">"te"</span>,</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">bs =</span> <span class="st">"cr"</span>,</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">6</span>)),</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fitter =</span> <span class="st">"gam"</span>,</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>                   <span class="at">family =</span> <span class="fu">betar</span>(<span class="at">link =</span> <span class="st">"probit"</span>,</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">theta =</span> theta_ideal[ iteration ]),</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tensortype =</span> <span class="st">"te"</span>,</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data =</span> tecator_data,</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weights =</span> tecator_data<span class="sc">$</span>train,</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">"REML"</span>)</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>  tecator_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fat_under =</span> fit_underfit<span class="sc">$</span>fitted.values,</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>         <span class="at">fat_over =</span> fit_overfit<span class="sc">$</span>fitted.values,</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>         <span class="at">fat_ideal =</span> fit_ideal<span class="sc">$</span>fitted.values)</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>  temporary_data <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">subset</span>(train <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>  diag_underfit <span class="ot">=</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gamlss</span>(<span class="at">formula =</span> fat <span class="sc">~-</span><span class="dv">1</span>,</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="fu">BE</span>(<span class="at">mu.link =</span> <span class="st">"identity"</span>,</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sigma.link =</span> <span class="st">"identity"</span>),</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.start =</span> temporary_data<span class="sc">$</span>fat_under,</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.fix =</span> T,</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> temporary_data,</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>           <span class="at">trace =</span> F)</span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>  diag_overfit <span class="ot">=</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gamlss</span>(<span class="at">formula =</span> fat <span class="sc">~-</span><span class="dv">1</span>,</span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="fu">BE</span>(<span class="at">mu.link =</span> <span class="st">"identity"</span>,</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sigma.link =</span> <span class="st">"identity"</span>),</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.start =</span> temporary_data<span class="sc">$</span>fat_over,</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.fix =</span> T,</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> temporary_data,</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>           <span class="at">trace =</span> F)</span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>  diag_ideal <span class="ot">=</span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gamlss</span>(<span class="at">formula =</span> fat <span class="sc">~-</span><span class="dv">1</span>,</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="fu">BE</span>(<span class="at">mu.link =</span> <span class="st">"identity"</span>,</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sigma.link =</span> <span class="st">"identity"</span>),</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.start =</span> temporary_data<span class="sc">$</span>fat_ideal,</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>           <span class="at">mu.fix =</span> T,</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> temporary_data,</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>           <span class="at">trace =</span> F)</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>  theta_underfit[ iteration <span class="sc">+</span> <span class="dv">1</span> ] <span class="ot">=</span> (<span class="dv">1</span> <span class="sc">-</span> diag_underfit<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (diag_underfit<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>)</span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>  theta_overfit[ iteration <span class="sc">+</span> <span class="dv">1</span> ] <span class="ot">=</span> (<span class="dv">1</span> <span class="sc">-</span> diag_overfit<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (diag_overfit<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>)</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>  theta_ideal[ iteration <span class="sc">+</span> <span class="dv">1</span> ] <span class="ot">=</span> (<span class="dv">1</span> <span class="sc">-</span> diag_ideal<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> (diag_ideal<span class="sc">$</span>sigma.coefficients <span class="sc">^</span> <span class="dv">2</span>)</span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>  iteration <span class="ot">=</span> iteration <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>g17 <span class="ot">=</span> tecator_data <span class="sc">|&gt;</span> <span class="fu">select</span>(fat_under, fat_over, fat_ideal, fat, train) <span class="sc">|&gt;</span></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">melt</span>(<span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">"fat"</span>,</span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"train"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> value,</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>         <span class="at">model =</span> <span class="fu">sapply</span>(<span class="at">X =</span> <span class="fu">as.character</span>(variable),</span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">switch</span>,</span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"fat_under"</span> <span class="ot">=</span> <span class="st">"K = 5"</span>,</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"fat_over"</span> <span class="ot">=</span> <span class="st">"K = 7"</span>,</span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"fat_ideal"</span> <span class="ot">=</span> <span class="st">"K = 6"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>           <span class="fu">factor</span>(<span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"K = 5"</span>,</span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"K = 6"</span>,</span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"K = 7"</span>)),</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>         <span class="at">train =</span> <span class="fu">factor</span>(<span class="at">x =</span> <span class="fu">ifelse</span>(<span class="at">test =</span> train <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Train"</span>, <span class="st">"Test"</span>),</span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Train"</span>, <span class="st">"Test"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="cn">NULL</span>,</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>         <span class="at">variable =</span> <span class="cn">NULL</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> fitted,</span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> fat,</span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> train)) <span class="sc">+</span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fitted"</span>,</span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"True"</span>,</span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>),</span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>),</span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>,</span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>              <span class="at">intercept =</span> <span class="dv">0</span>,</span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a>              <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(model))</span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>g17</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div id="fig-estimation0002" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-estimation0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-estimation0002-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation0002-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12: Fitted values versus true values of Fat percentage, separated between training and test data sets, for <span class="math inline">\(K \in \{5,6,7\}\)</span>.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p><a href="#fig-estimation0003" class="quarto-xref">Figure&nbsp;13</a> depicts some residual analysis plots output by the <tt>appraise()</tt> method from the <tt>gratia</tt> package in <tt>R</tt>. The normalized quantile residuals seems sufficiently close to normality, hence we conclude the model exhibits a good fit, when we consider the training data solely.</p>
-<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-estimation0003" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-estimation0003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-estimation0003-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+<img src="tecatorRegression_files/figure-html/fig-estimation0003-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation0003-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13: Residual analysis plot generated via the <tt>appraise()</tt> method for the training data set.
+Figure&nbsp;14: Fitted values versus true values of Fat percentage, separated between training and test data sets, for <span class="math inline">\(K \in \{5,6,7\}\)</span>.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-estimation0004" class="quarto-xref">Figure&nbsp;14</a> depicts again the residual analysis plots output by the <tt>appraise()</tt> method, constructed utilizing now the full data set, with <span class="math inline">\(K = 6\)</span>. The normalized quantile residuals seems less close to normality when compared to the previous residuals analysis plots seen in <a href="#fig-estimation0003" class="quarto-xref">Figure&nbsp;13</a>, exhibiting in particular a higher kurtosis.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-estimation0004" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
+<p><a href="#fig-estimation0004" class="quarto-xref">Figure&nbsp;15</a> depicts some residual analysis plots output by the <tt>appraise()</tt> method from the <tt>gratia</tt> package in <tt>R</tt>. The QQ plot presents deviations at the extremes, and the linear predictor versus deviance residuals plot exhibits evidence of non-homoscedastic behavior, with a higher variation in residuals with lower corresponding linear predictors values. Nevertheless, we conclude the model exhibits a sufficiently good fit, when estimated solely on the training data.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-estimation0004" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-estimation0004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="vignette0001_files/figure-html/fig-estimation0004-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+<img src="tecatorRegression_files/figure-html/fig-estimation0004-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-estimation0004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14: Residual analysis plot generated via the <tt>appraise()</tt> method for the complete data set.
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-estimation0004-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: Residual analysis plot generated via the <tt>appraise()</tt> method for the training data set.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-estimation0005" class="quarto-xref">Figure&nbsp;16</a> depicts the residual analysis plots output by the <tt>appraise()</tt> method for the model constructed utilizing the full data set, with <span class="math inline">\(K = 6\)</span>. The residuals present similar behavior to that which was noted in <a href="#fig-estimation0005" class="quarto-xref">Figure&nbsp;16</a>, and as such we conclude again that the fit is sufficiently good.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-estimation0005" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-estimation0005-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="tecatorRegression_files/figure-html/fig-estimation0005-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-estimation0005-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16: Residual analysis plot generated via the <tt>appraise()</tt> method for the complete data set.
 </figcaption>
 </figure>
 </div>
@@ -1417,84 +1528,43 @@ Figure&nbsp;14: Residual analysis plot generated via the <tt>appraise()</tt> met
 </div>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>temporary_data <span class="ot">=</span> tecator_data<span class="sc">$</span>dabsorbance <span class="sc">|&gt;</span> <span class="fu">as.matrix</span>() <span class="sc">|&gt;</span> <span class="fu">t</span>() <span class="sc">|&gt;</span> <span class="fu">melt</span>()</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="fu">smooth_estimates</span>(fit_total, <span class="at">dist =</span> .<span class="dv">05</span>) </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(se) <span class="sc">+</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Wavelength "</span>, <span class="st">"(in "</span>, <span class="fu">italic</span>(<span class="st">"nm"</span>), <span class="st">")"</span>)),</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance"</span>)),,</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">""</span>,</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">""</span>,</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">tag =</span> <span class="st">""</span>,</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"850"</span>, <span class="st">"950"</span>, <span class="st">"1050"</span>),</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.01169591</span>, <span class="fl">1.004762</span>)) <span class="sc">+</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"te("</span>,<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance,"</span>, <span class="fu">italic</span>(t), <span class="st">")"</span>))) <span class="sc">+</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>,</span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>                        <span class="at">guide =</span> <span class="st">"colourbar"</span>) <span class="sc">+</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_colourbar</span>(<span class="at">title =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Partial effect"</span>))))</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Scale for fill is already present.</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adding another scale for fill, which will replace the existing scale.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="fu">smooth_estimates</span>(fit_total, <span class="at">dist =</span> .<span class="dv">05</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>se <span class="sc">|&gt;</span> <span class="fu">draw</span>() <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Wavelength "</span>, <span class="st">"(in "</span>, <span class="fu">italic</span>(<span class="st">"nm"</span>), <span class="st">")"</span>)),</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance"</span>)),,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">""</span>,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">""</span>,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">tag =</span> <span class="st">""</span>,</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"850"</span>, <span class="st">"950"</span>, <span class="st">"1050"</span>),</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.01169591</span>, <span class="fl">1.004762</span>)) <span class="sc">+</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"te("</span>,<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance,"</span>, <span class="fu">italic</span>(t), <span class="st">")"</span>))) <span class="sc">+</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>,</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>                        <span class="at">guide =</span> <span class="st">"colourbar"</span>) <span class="sc">+</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_colourbar</span>(<span class="at">title =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Partial effect"</span>))))</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Scale for fill is already present.</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adding another scale for fill, which will replace the existing scale.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="vignette0001_files/figure-html/estimation0005-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>se <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">.estimate =</span> <span class="fu">abs</span>(.estimate <span class="sc">/</span> .se <span class="sc">**</span> .<span class="dv">5</span>)) <span class="sc">|&gt;</span> <span class="fu">draw</span>() <span class="sc">+</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"right"</span>) <span class="sc">+</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Wavelength "</span>, <span class="st">"(in "</span>, <span class="fu">italic</span>(<span class="st">"nm"</span>), <span class="st">")"</span>)),</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance"</span>)),,</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">""</span>,</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">""</span>,</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">4</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"850"</span>, <span class="st">"930"</span>, <span class="st">"950"</span>, <span class="st">"1050"</span>),</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.01169591</span>, <span class="fl">1.004762</span>)) <span class="sc">+</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"te("</span>,<span class="fu">italic</span>(<span class="st">"D"</span>),<span class="st">"Absorbance,"</span>, <span class="fu">italic</span>(t), <span class="st">")"</span>))) <span class="sc">+</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>,</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>                        <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>                        <span class="at">guide =</span> <span class="st">"colourbar"</span>) <span class="sc">+</span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_colourbar</span>(<span class="at">title =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(t), <span class="st">"-statistic"</span>))))</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Scale for fill is already present.</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Adding another scale for fill, which will replace the existing scale.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="vignette0001_files/figure-html/estimation0005-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="tecatorRegression_files/figure-html/estimation0006-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>

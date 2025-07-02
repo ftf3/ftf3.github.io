@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Felipe Toledo Ferreira">
-<meta name="dcterms.date" content="2025-06-27">
-<meta name="description" content="I present a approach to functional data representation based on automatic relevance determination and compare it with previous approaches.">
+<meta name="dcterms.date" content="2025-07-01">
+<meta name="description" content="An approach to functional data representation based on automatic relevance determination.">
 
 <title>Automatic Relevance Determination for Functional Data Representation – Felipe Ferreira</title>
 <style>
@@ -160,10 +160,10 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="floating nav-fixed slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -179,11 +179,11 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../vignettes.html"> 
-<span class="menu-text"><tt style="background: #AD1519;">R</tt> Vignettes</span></a>
+<span class="menu-text"><tt style="background: #AD1519; color: white;">R</tt> Vignettes</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../solutions.html"> 
-<span class="menu-text">Exercise Solutions</span></a>
+<span class="menu-text">Solutions</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -193,12 +193,45 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Automatic Relevance Determination for Functional Data Representation</h1>
+            <p class="subtitle lead">…a Vignette on Functional Data Analysis</p>
+                  <div>
+        <div class="description">
+          An approach to functional data representation based on automatic relevance determination.
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://github.com/FelipeToledoFerreira">Felipe Toledo Ferreira</a> </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 1, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
@@ -220,56 +253,29 @@ window.Quarto = {
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Automatic Relevance Determination for Functional Data Representation</h1>
-<p class="subtitle lead">…a Vignette on Functional Data Analysis</p>
-</div>
-
-<div>
-  <div class="description">
-    I present a approach to functional data representation based on automatic relevance determination and compare it with previous approaches.
-  </div>
-</div>
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p><a href="https://github.com/FelipeToledoFerreira">Felipe Toledo Ferreira</a> </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 27, 2025</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
 
 
-</header>
 
 
-<hr>
-<section id="introduction" class="level1">
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Last updated in 2025/07/01.</p>
+</div></div><section id="introduction" class="level1">
 <h1>Introduction</h1>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <p>For this particular study, we consider two distinct data sets, the Motorcycle data set and the Canadian weather data set: the former is frequently studied in the overall spline smoothing context, whilst the latter is appropriate for the more specific context of Functional Data Analysis. We will also present a brief simulation study.</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Show <tt>R</tt> code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)  <span class="do">## R package for tidy data manipulation and visualization</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tf"</span>)         <span class="do">## R package for tidy functional data manipulation</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyfun"</span>)    <span class="do">## R package for tidy functional data visualization</span></span>
@@ -284,7 +290,7 @@ window.Quarto = {
 <p>The Motorcycle data set (seen in <span class="citation" data-cites="silverman:1985">Silverman (<a href="#ref-silverman:1985" role="doc-biblioref">1985</a>)</span>, and available in the <tt>R</tt> programming language in the package <tt>MASS</tt>), is composed of data recorded on a Tecator Infratec Food and Feed Analyzer tool, working in the wavelength range 850 - 1050<i>nm</i> by the Near Infrared Transmission (NIT) principle. Each sample (<span class="math inline">\(N = 240\)</span>) contains finely chopped pure meat with different moisture, fat and protein contents. For each meat sample the data consists of a 100 channel spectrum of absorbances and the contents of moisture (water), fat and protein. The absorbance is <span class="math inline">\(-\log_{10}\)</span> of the transmittance measured by the spectrometer. The three contents, measured in percent, are determined by analytic chemistry (click <a href="https://lib.stat.cmu.edu/datasets/tecator">here</a> for further details).</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Show <tt>R</tt> code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>motorcycle_data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>motorcycle_data<span class="sc">$</span>curve <span class="ot">=</span> <span class="fu">tfd</span>(<span class="at">data =</span> mcycle<span class="sc">$</span>accel,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">arg =</span> <span class="fu">jitter</span>(mcycle<span class="sc">$</span>times, <span class="at">amount =</span> <span class="fl">0.1</span>))</span>

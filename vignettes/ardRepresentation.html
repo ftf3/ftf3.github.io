@@ -8,8 +8,9 @@
 
 <meta name="author" content="Felipe Toledo Ferreira">
 <meta name="dcterms.date" content="2025-07-01">
+<meta name="description" content="An approach to functional data representation based on automatic relevance determination.">
 
-<title>Introdução à Inferência Estatística – Felipe Ferreira</title>
+<title>Automatic Relevance Determination for Functional Data Representation – Felipe Ferreira</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +23,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -71,11 +127,40 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-light">
+<body class="floating nav-fixed slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -111,9 +196,14 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Introdução à Inferência Estatística</h1>
-            <p class="subtitle lead">Heleno Bolfarine and Mônica Carneiro Sandoval</p>
-                      </div>
+      <h1 class="title">Automatic Relevance Determination for Functional Data Representation</h1>
+            <p class="subtitle lead">…a Vignette on Functional Data Analysis</p>
+                  <div>
+        <div class="description">
+          An approach to functional data representation based on automatic relevance determination.
+        </div>
+      </div>
+                </div>
   </div>
     
   
@@ -140,25 +230,189 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#the-motorcycle-data-set" id="toc-the-motorcycle-data-set" class="nav-link" data-scroll-target="#the-motorcycle-data-set">The Motorcycle data set</a></li>
+  <li><a href="#the-canadian-weather-data-set" id="toc-the-canadian-weather-data-set" class="nav-link" data-scroll-target="#the-canadian-weather-data-set">The Canadian weather data set</a></li>
+  <li><a href="#simulated-data" id="toc-simulated-data" class="nav-link" data-scroll-target="#simulated-data">Simulated data</a></li>
+  </ul></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  </ul></li>
+  <li><a href="#relevance-vector-machines-for-regression" id="toc-relevance-vector-machines-for-regression" class="nav-link" data-scroll-target="#relevance-vector-machines-for-regression">Relevance Vector Machines for Regression</a>
+  <ul class="collapse">
+  <li><a href="#fixed-point-updates" id="toc-fixed-point-updates" class="nav-link" data-scroll-target="#fixed-point-updates">Fixed Point Updates</a></li>
+  <li><a href="#expectation-maximization-approach" id="toc-expectation-maximization-approach" class="nav-link" data-scroll-target="#expectation-maximization-approach">Expectation Maximization Approach</a></li>
+  </ul></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<object data="introducaoInferencia.pdf" type="application/pdf" width="100%" height="950px">
-</object>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Last updated 2025/07/01.</p>
+</div></div><section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>For this particular study, we consider two distinct data sets, the Motorcycle data set and the Canadian weather data set: the former is frequently studied in the overall spline smoothing context, whilst the latter is appropriate for the more specific context of Functional Data Analysis. We will also present a brief simulation study.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)  <span class="do">## R package for tidy data manipulation and visualization</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tf"</span>)         <span class="do">## R package for tidy functional data manipulation</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyfun"</span>)    <span class="do">## R package for tidy functional data visualization</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"extrafont"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"fda"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MASS"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tf"</span>)         <span class="do">## R package for tidy functional data manipulation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="the-motorcycle-data-set" class="level3">
+<h3 class="anchored" data-anchor-id="the-motorcycle-data-set">The Motorcycle data set</h3>
+<p>The Motorcycle data set (seen in <span class="citation" data-cites="silverman:1985">Silverman (<a href="#ref-silverman:1985" role="doc-biblioref">1985</a>)</span>, and available in the <tt>R</tt> programming language in the package <tt>MASS</tt>), is composed of data recorded on a Tecator Infratec Food and Feed Analyzer tool, working in the wavelength range 850 - 1050<i>nm</i> by the Near Infrared Transmission (NIT) principle. Each sample (<span class="math inline">\(N = 240\)</span>) contains finely chopped pure meat with different moisture, fat and protein contents. For each meat sample the data consists of a 100 channel spectrum of absorbances and the contents of moisture (water), fat and protein. The absorbance is <span class="math inline">\(-\log_{10}\)</span> of the transmittance measured by the spectrometer. The three contents, measured in percent, are determined by analytic chemistry (click <a href="https://lib.stat.cmu.edu/datasets/tecator">here</a> for further details).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>motorcycle_data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>motorcycle_data<span class="sc">$</span>curve <span class="ot">=</span> <span class="fu">tfd</span>(<span class="at">data =</span> mcycle<span class="sc">$</span>accel,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">arg =</span> <span class="fu">jitter</span>(mcycle<span class="sc">$</span>times, <span class="at">amount =</span> <span class="fl">0.1</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>motorcycle_data<span class="sc">$</span>smooth_curve <span class="ot">=</span> motorcycle_data<span class="sc">$</span>curve <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tfb</span>(<span class="at">basis =</span> <span class="st">"spline"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">k =</span> <span class="dv">15</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">bs =</span> <span class="st">"cr"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>g03 <span class="ot">=</span> motorcycle_data <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> smooth_curve)) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_spaghetti</span>() <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Wavelength "</span>, <span class="st">"(in "</span>, <span class="fu">italic</span>(<span class="st">"nm"</span>), <span class="st">")"</span>)),</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Absorbance"</span>,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">""</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>g03</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ardRepresentation_files/figure-html/data0001-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-canadian-weather-data-set" class="level3">
+<h3 class="anchored" data-anchor-id="the-canadian-weather-data-set">The Canadian weather data set</h3>
+<p>The Canadian weather data set</p>
+</section>
+<section id="simulated-data" class="level3">
+<h3 class="anchored" data-anchor-id="simulated-data">Simulated data</h3>
+<p><span class="math display">\[
+  y_i(t_{i,j}) = \cos(t_{i,j}) + \sin(2 t_{i,j}) + \varepsilon_{i}(t_{i,j})
+\]</span> and <span class="math display">\[
+  y_i(t_{i,j}) = \begin{pmatrix}
+    -2 \\
+    0 \\
+    3/2 \\
+    3/2 \\
+    0 \\
+    -1 \\
+    -1/2 \\
+    -1 \\
+    0 \\
+    0
+  \end{pmatrix}\textbf{B}(t_{i,j}) + \varepsilon_i(t_{i,j})
+\]</span></p>
+</section>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>This vignette is primarily concerned with presenting an approach to sparse Functional Data representation utilizing the Automatic Relevance Determination (ARD) framework, itself only a topic in the wider Sparse Bayesian Learning (SBL) context. More precisely, our aim herein is to replicate some of the studies in <span class="citation" data-cites="sousa:2024">Sousa, Souza, and Dias (<a href="#ref-sousa:2024" role="doc-biblioref">2024</a>)</span> and <span class="citation" data-cites="daCruz:2024">Cruz, Souza, and Sousa (<a href="#ref-daCruz:2024" role="doc-biblioref">2024</a>)</span> (the former moreso than the latter, as we do not account for any correlation structure in the curves). The goal of these previous studies was to provide a novel Bayesian adaptive procedure to select the bases for functional data representation, the latter also extending the results of the former by including a correlation structure for the functional data, and delineating an estimation procedure utilizing the Variational Bayes (VB) approach.</p>
+<p><span class="math display">\[
+  \beta \sim \text{Normal}(0_K,\textbf{A}).
+\]</span> where <span class="math inline">\(\textbf{A} = \text{diag}(\alpha_i)\)</span>. For further detailing and intuition on the inner workings of the ARD approach, we refer the reader to <span class="citation" data-cites="tipping:2001">Tipping (<a href="#ref-tipping:2001" role="doc-biblioref">2001</a>)</span></p>
+<p><span class="math display">\[
+  \begin{aligned}
+    \Sigma &amp; = (\textbf{A} + \beta \Phi^\top \Phi)^{-1} \\
+    &amp; = \textbf{A}^{-1} - \textbf{A}^{-1}\Phi^\top(\mathbb{I}_N + \beta \Phi \textbf{A}^{-1} \Phi^\top )^{-1}\Phi \textbf{A}^{-1}
+  \end{aligned}
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="relevance-vector-machines-for-regression" class="level1">
+<h1>Relevance Vector Machines for Regression</h1>
+<p><span class="math display">\[
+  q_i = \frac{\alpha_i Q_i}{\alpha_i - S_i}
+\]</span> and <span class="math display">\[
+  s_i = \frac{\alpha_i S_i}{\alpha_i - S_i}
+\]</span></p>
+<section id="fixed-point-updates" class="level2">
+<h2 class="anchored" data-anchor-id="fixed-point-updates">Fixed Point Updates</h2>
+<p>A</p>
+</section>
+<section id="expectation-maximization-approach" class="level2">
+<h2 class="anchored" data-anchor-id="expectation-maximization-approach">Expectation Maximization Approach</h2>
+<p>B</p>
+</section>
+</section>
+<section id="concluding-remarks" class="level1">
+<h1>Concluding Remarks</h1>
+</section>
+<section id="references" class="level1">
 
 
 
-</main> <!-- /main -->
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bishop:2006" class="csl-entry" role="listitem">
+Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine Learning</em>. Springer.
+</div>
+<div id="ref-daCruz:2024" class="csl-entry" role="listitem">
+Cruz, Ana Carolina da, Camila P. E. de Souza, and Pedro H. T. O. Sousa. 2024. <span>“Fast Bayesian Basis Selection for Functional Data Representation with Correlated Errors.”</span> <a href="https://arxiv.org/abs/2405.20758">https://arxiv.org/abs/2405.20758</a>.
+</div>
+<div id="ref-silverman:1985" class="csl-entry" role="listitem">
+Silverman, B. W. 1985. <span>“Some Aspects of the Spline Smoothing Approach to Non-Parametric Regression Curve Fitting.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 47 (1): 1–21. <a href="https://doi.org/10.1111/j.2517-6161.1985.tb01327.x">https://doi.org/10.1111/j.2517-6161.1985.tb01327.x</a>.
+</div>
+<div id="ref-sousa:2024" class="csl-entry" role="listitem">
+Sousa, Pedro Henrique T. O., Camila P. E. de Souza, and Ronaldo Dias. 2024. <span>“Bayesian Adaptive Selection of Basis Functions for Functional Data Representation.”</span> <em>Journal of Applied Statistics</em> 51 (5): 958–92. <a href="https://doi.org/10.1080/02664763.2023.2172143">https://doi.org/10.1080/02664763.2023.2172143</a>.
+</div>
+<div id="ref-tipping:2001" class="csl-entry" role="listitem">
+Tipping, Michael E. 2001. <span>“Sparse Bayesian Learning and the Relevance Vector Machine.”</span> <em>J. Mach. Learn. Res.</em> 1 (September): 211–44. <a href="https://doi.org/10.1162/15324430152748236">https://doi.org/10.1162/15324430152748236</a>.
+</div>
+<div id="ref-venables:2002" class="csl-entry" role="listitem">
+Venables, W. N., and B. D. Ripley. 2002. <em>Modern Applied Statistics with s</em>. Fourth. New York: Springer. <a href="https://www.stats.ox.ac.uk/pub/MASS4/">https://www.stats.ox.ac.uk/pub/MASS4/</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
