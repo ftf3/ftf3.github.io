@@ -118,7 +118,8 @@ var out = document.getElementById("output");
                 '"They\'re turning kids into slaves just to make sneakers cheaper, but what\'s the real cost? Cause the sneakers don\'t seem that much cheaper."',
                 '"Hey you!"',
                 '"And I can\'t believe that anyone would wanna do such a terrible thing, but why should I care?"',
-                '"They send the heart police to put you under cardiac arrest."',];
+                '"They send the heart police to put you under cardiac arrest."',
+                '"I guess I\'m too fun, I guess I\'m too funny. If you\'re not laughing, baby, then you\'re not making money!"',];
 	var theSource= [
                 'Chaco, Cannibal Holocaust (1980)',
                 '"Magic Bus", The Who (1968)',
@@ -238,7 +239,8 @@ var out = document.getElementById("output");
                 '"Think About It", Flight of the Conchords (2008)',
                 '"Carousel", Mr. Bungle (1991)',
                 '"Nothing Bad Ever Happens To Me", Oingo Boingo (1983)',
-                '"The Plastic Age", The Buggles (1980)',];
+                '"The Plastic Age", The Buggles (1980)',
+                '"MMMOOOAAAAAYAYA", illuminati hotties (2021)',];
         if(sessionStorage.getItem('theQuotes') !== null)
         {
             var seen = JSON.parse(sessionStorage.getItem("theQuotes"));

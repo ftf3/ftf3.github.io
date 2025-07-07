@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Felipe Toledo Ferreira">
-<meta name="dcterms.date" content="2025-07-02">
+<meta name="dcterms.date" content="2025-07-07">
 <meta name="description" content="An approach to functional data representation based on automatic relevance determination.">
 
 <title>Automatic Relevance Determination for Functional Data Representation – Felipe Ferreira</title>
@@ -219,7 +219,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">July 2, 2025</p>
+        <p class="date">July 7, 2025</p>
       </div>
     </div>
     
@@ -242,12 +242,17 @@ window.Quarto = {
   <li><a href="#the-canadian-weather-data-set" id="toc-the-canadian-weather-data-set" class="nav-link" data-scroll-target="#the-canadian-weather-data-set">The Canadian weather data set</a></li>
   <li><a href="#simulated-data" id="toc-simulated-data" class="nav-link" data-scroll-target="#simulated-data">Simulated data</a></li>
   </ul></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  </ul></li>
-  <li><a href="#relevance-vector-machines-for-regression" id="toc-relevance-vector-machines-for-regression" class="nav-link" data-scroll-target="#relevance-vector-machines-for-regression">Relevance Vector Machines for Regression</a>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a>
   <ul class="collapse">
-  <li><a href="#fixed-point-updates" id="toc-fixed-point-updates" class="nav-link" data-scroll-target="#fixed-point-updates">Fixed Point Updates</a></li>
-  <li><a href="#expectation-maximization-approach" id="toc-expectation-maximization-approach" class="nav-link" data-scroll-target="#expectation-maximization-approach">Expectation Maximization Approach</a></li>
+  <li><a href="#automatic-relevance-determination" id="toc-automatic-relevance-determination" class="nav-link" data-scroll-target="#automatic-relevance-determination">Automatic Relevance Determination</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#applications-and-simulations" id="toc-applications-and-simulations" class="nav-link" data-scroll-target="#applications-and-simulations">Applications and Simulations</a>
+  <ul class="collapse">
+  <li><a href="#sec-app-mcycle" id="toc-sec-app-mcycle" class="nav-link" data-scroll-target="#sec-app-mcycle">Application I</a></li>
+  <li><a href="#application-ii" id="toc-application-ii" class="nav-link" data-scroll-target="#application-ii">Application II</a></li>
+  <li><a href="#simulation-study-i" id="toc-simulation-study-i" class="nav-link" data-scroll-target="#simulation-study-i">Simulation Study I</a></li>
+  <li><a href="#simulation-study-ii" id="toc-simulation-study-ii" class="nav-link" data-scroll-target="#simulation-study-ii">Simulation Study II</a></li>
   </ul></li>
   <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -267,12 +272,12 @@ window.Quarto = {
 
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>Last updated 2025/07/02.</p>
+<p>Last updated 2025/07/07.</p>
 </div></div><section id="introduction" class="level1 page-columns page-full">
 <h1>Introduction</h1>
 <section id="data" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>For this particular study, we consider two distinct data sets, the Motorcycle data set and the Canadian weather data set: the former is frequently studied in the overall spline smoothing context (as well as overall studies in Nonparametric Statistics), whilst the latter is most often used in the specific context of Functional Data Analysis. We will also present a brief simulation study.</p>
+<p>For this particular study, we consider two distinct data sets, the Motorcycle data set and the Canadian weather data set: the former is frequently studied in the overall spline smoothing context (as well as overall studies in Nonparametric Statistics), whilst the latter is most often used in the specific context of Functional Data Analysis. We will also present a brief simulation study. The <tt>R</tt> chunk provided below loads the relevant packages utilized throughout.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show <tt>R</tt> code</summary>
@@ -282,81 +287,113 @@ window.Quarto = {
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MASS"</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"magrittr"</span>)   <span class="do">## R package for pipes</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"patchwork"</span>)  <span class="do">## R package for plot composition</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"reshape2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"reshape2"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"rstan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="the-motorcycle-data-set" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="the-motorcycle-data-set">The Motorcycle data set</h3>
-<p>The Motorcycle data set (seen in <span class="citation" data-cites="silverman:1985">Silverman (<a href="#ref-silverman:1985" role="doc-biblioref">1985</a>)</span>, and available in the <tt>R</tt> programming language in the package <tt>MASS</tt>).</p>
-<p><span id="eq-expansion"><span class="math display">\[
-  y_i(t_{ij}) = \sum^K_{k = 1}\beta_{ki} \textbf{B}_k(t_{ij})
+<p>The Motorcycle data set (seen in <span class="citation" data-cites="silverman:1985">Silverman (<a href="#ref-silverman:1985" role="doc-biblioref">1985</a>)</span>, and available in the <tt>R</tt> programming language in the package <tt>MASS</tt>) consists of <span class="math inline">\(n = 133\)</span> measurements obtained through an experiment which simulated motorcycle accidents with the goal of determining the efficacy of crash helmets: an accelerometer was fitted to an object which was later submitted to repeated mechanical impacts, and the resulting acceleration was measured in the instants subsequent to the impacts. We denote the measurements of the time (in milliseconds) elapsed since the impact occurs as <span class="math inline">\(t_j\)</span>, and the acceleration (in g) measured at the corresponding instant as <span class="math inline">\(y_j\)</span>, hence we denote the full data set as <span class="math inline">\(\{t_j, y_j\}^n_{j = 1}\)</span>. Some observations can be made with respect to the set of instants <span class="math inline">\(\{t_j\}^n_{j = 1}\)</span>: as the data set was gathered through repeat experiments, the measured instants are not equally spaced, and some appear multiple times (with distinct corresponding <span class="math inline">\(y_j\)</span>). Let <span class="math inline">\(Y_j\)</span> denote a random variable corresponding to the <span class="math inline">\(j\)</span>-th accelerometer measurement, we assume that</p>
+<p><span id="eq-expectation"><span class="math display">\[
+  \mathbb{E}[Y_j] = g(t_j) \quad j \in \{1,\ldots,n\}.
 \tag{1}\]</span></span></p>
+<p>That is, we assume that albeit the accelerometer measurements are randomly distributed, they present some regularity in the form of a mean, which is dependent on the instant at which the measurement is made, expressed as the mean function <span class="math inline">\(g(\cdot)\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. In particular, we’ll assume that <span class="math inline">\(Y_j \sim \text{Normal}(g(t_j), 1/\tau)\)</span>, <span class="math inline">\(\tau &gt; 0\)</span>, or equivalently</p>
+<p><span id="eq-decomposition"><span class="math display">\[
+  y_j = g(t_j) + \tau^{-1/2}\varepsilon_j \quad j \in \{1,\ldots,n\},
+\tag{2}\]</span></span></p>
+<p>where <span class="math inline">\(\varepsilon_j \sim \text{Normal}(0,1), j \in \{1,\ldots,n\}\)</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The first term on the r.h.s. of <a href="#eq-decomposition" class="quarto-xref">Equation&nbsp;2</a> is the ‘<em>deterministic component</em>’, whilst the second term on the r.h.s. of <a href="#eq-decomposition" class="quarto-xref">Equation&nbsp;2</a> is the ‘<em>stochastic component</em>’. Our goal is to construct an estimator <span class="math inline">\(\hat{g}(\cdot)\)</span> for the deterministic component. Naturally, searching for an optimal <span class="math inline">\(\hat{g}(\cdot) \in \mathcal{G}\)</span>, where <span class="math inline">\(\mathcal{G}\)</span> is an arbitrary functional space (e.g.&nbsp;the space of square integrable functions) is computationally unfeasible, as <span class="math inline">\(\mathcal{G}\)</span> would likely be infinite-dimensional. For that purpose, first we will assume that <span class="math inline">\(g(\cdot)\)</span> may be written as the linear combination of a set of basis functions <span class="math inline">\(\{\phi_k(\cdot)\}_{k = 1}^{K}\)</span> of the following form</p>
+<p><span id="eq-expansion"><span class="math display">\[
+  g(t) = \sum^K_{k = 1}\beta_{k} \phi_k(t),
+\tag{3}\]</span></span></p>
+<p>for some <span class="math inline">\(\boldsymbol{\beta} \in \mathbb{R}^{K}\)</span>. This allows us to recontextualize the usually infinite-dimensional problem of estimating <span class="math inline">\({g}(\cdot) \in \mathcal{G}\)</span> as a finite-dimensional problem of estimating <span class="math inline">\(\boldsymbol{\beta} \in \mathbb{R}^K\)</span>. Ideally, the set of basis functions <span class="math inline">\(\{\phi_k(\cdot)\}_{k = 1}^K\)</span> would be chosen so as to both reflect properties we believe the function <span class="math inline">\(g(\cdot)\)</span> possesses (e.g., continuity to the <span class="math inline">\(M\)</span>-th order) and to provide a sufficiently flexible foundation which may approximate several distinct forms of <span class="math inline">\(g(\cdot)\)</span> (there are also data-driven choices for basis functions, such as via functional principal components analysis). A natural choice for a set of basis functions are those generated in the B-spline framework (see <span class="citation" data-cites="deBoor:1978">De Boor (<a href="#ref-deBoor:1978" role="doc-biblioref">1978</a>)</span>). In particular, we’ll consider cubic B-splines with equidistant knots (with the first knot defined as <span class="math inline">\(\min_j\{t_j\}\)</span> and the last knot as <span class="math inline">\(\max_j\{t_j\}\)</span>), such that the number of basis functions in a basis set is <span class="math inline">\(K\)</span> (including boundary B-splines), with <span class="math inline">\(K \in \{5,10,15,20,25,30\}\)</span>. Let <span class="math inline">\(\boldsymbol{\Phi} \in \mathbb{R}^{K \times K}\)</span> and <span class="math inline">\(\boldsymbol{\phi}(t) \in \mathbb{R}^K\)</span> be defined as <span id="eq-matrix"><span class="math display">\[
+  \boldsymbol{\Phi} = \begin{pmatrix}
+    \phi_{1}(t_1) &amp; \phi_{2}(t_1) &amp; \dots &amp; \phi_{K}(t_1) \\
+    \phi_{1}(t_2) &amp; \phi_{2}(t_2) &amp; \dots &amp; \phi_{K}(t_2) \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    \phi_{1}(t_n) &amp; \phi_{2}(t_n) &amp; \dots &amp; \phi_{K}(t_n)
+  \end{pmatrix} \quad \text{and} \quad \boldsymbol{\phi}(t) = \begin{pmatrix}
+    \phi_1(t) \\
+    \phi_2(t) \\
+    \vdots \\
+    \phi_K(t)
+  \end{pmatrix},
+\tag{4}\]</span></span> we determine the estimates for the coefficients <span class="math inline">\(\boldsymbol{\beta}\)</span> via maximum likelihood estimation as <span class="math display">\[
+  \begin{aligned}
+    \hat{\boldsymbol{\beta}}_\text{ML} &amp; = \arg \max_{\boldsymbol{\beta}\in\mathbb{R}^K} \Bigg\{-\frac{n}{2}\ln(2 \pi) + \frac{n}{2} \ln(\tau) -\frac{\tau}{2}\sum^n_{j = 1}(y_j - \boldsymbol{\beta}^\top \boldsymbol{\phi}(t_j))^2 \Bigg\} \\
+    &amp; = \arg \min_{\boldsymbol{\beta} \in \mathbb{R}^K} \Bigg\{\sum^n_{j = 1}(y_j - \boldsymbol{\beta}^\top \boldsymbol{\phi}(t_j))^2\Bigg\} \\
+    \hat{\boldsymbol{\beta}}_\text{ML} &amp; = (\boldsymbol{\Phi}^\text{T} \boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^\text{T}\mathrm{y},
+  \end{aligned}
+\]</span> assuming <span class="math inline">\(\boldsymbol{\Phi}^\text{T}\boldsymbol{\Phi}\)</span> is positive-definite. Therefore, the estimated mean function <span class="math inline">\(\hat{g}(\cdot)\)</span> evaluated at a point <span class="math inline">\(s\)</span> is defined as <span class="math display">\[
+  \hat{g}(s) = \boldsymbol{\hat{\beta}}^\text{T}_{\text{ML}} \boldsymbol{\phi}(s).
+\]</span> <a href="#fig-mcycle" class="quarto-xref">Figure&nbsp;1</a> illustrates the estimated mean functions <span class="math inline">\(\hat{g}(\cdot)\)</span> obtained via maximum likelihood for each <span class="math inline">\(K\)</span>.</p>
 <div class="cell page-columns page-full">
 <details class="code-fold">
 <summary>Show <tt>R</tt> code</summary>
 <div class="sourceCode cell-code" id="cb2" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">747</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>K <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mcycle <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">times0 =</span> <span class="fu">jitter</span>(times,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">amount =</span> .<span class="dv">01</span>))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>eval_basis <span class="ot">=</span> mcycle <span class="sc">%&gt;%</span> {<span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(.<span class="sc">$</span>times0),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">to =</span> <span class="fu">max</span>(.<span class="sc">$</span>times0),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                             <span class="at">length.out =</span> <span class="fl">1e3</span> <span class="sc">+</span> <span class="dv">1</span>)}</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>mcycle_fda <span class="ot">=</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(K),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>           design_basis <span class="ot">=</span> <span class="fu">create.bspline.basis</span>(<span class="at">rangeval =</span> <span class="fu">range</span>(mcycle<span class="sc">$</span>times0),</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">norder =</span> <span class="dv">4</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">nbasis =</span> K[x])</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>           design_matrix <span class="ot">=</span> design_basis <span class="sc">%&gt;%</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>             <span class="fu">getbasismatrix</span>(<span class="at">evalarg =</span> mcycle<span class="sc">$</span>times0,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>eval_x <span class="ot">=</span> mcycle <span class="sc">%&gt;%</span> {<span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(.<span class="sc">$</span>times), <span class="at">to =</span> <span class="fu">max</span>(.<span class="sc">$</span>times), <span class="at">length.out =</span> <span class="fl">1e3</span> <span class="sc">+</span> <span class="dv">1</span>)}</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mcycle_fda <span class="ot">=</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(K),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>           design_basis <span class="ot">=</span> <span class="fu">create.bspline.basis</span>(<span class="at">rangeval =</span> <span class="fu">range</span>(mcycle<span class="sc">$</span>times),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">norder =</span> <span class="dv">4</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">nbasis =</span> K[x])</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>           design_matrix <span class="ot">=</span> design_basis <span class="sc">%&gt;%</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>             <span class="fu">getbasismatrix</span>(<span class="at">evalarg =</span> mcycle<span class="sc">$</span>times,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                            <span class="at">basisobj =</span> .,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">nderiv =</span> <span class="dv">0</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>           design_matrixf <span class="ot">=</span> design_basis <span class="sc">%&gt;%</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>             <span class="fu">getbasismatrix</span>(<span class="at">evalarg =</span> eval_x,</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">basisobj =</span> .,</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                            <span class="at">nderiv =</span> <span class="dv">0</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>           design_matrixf <span class="ot">=</span> design_basis <span class="sc">%&gt;%</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>             <span class="fu">getbasismatrix</span>(<span class="at">evalarg =</span> eval_basis,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                            <span class="at">basisobj =</span> .,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">nderiv =</span> <span class="dv">0</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>           coefficients <span class="ot">=</span> design_matrix <span class="sc">%&gt;%</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>             {<span class="fu">solve</span>(<span class="at">a =</span> <span class="fu">t</span>(.) <span class="sc">%*%</span> .,</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                    <span class="at">b =</span> <span class="fu">t</span>(.) <span class="sc">%*%</span> mcycle<span class="sc">$</span>accel)}</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>           <span class="fu">colnames</span>(design_matrix) <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>K[x]</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>           <span class="fu">colnames</span>(design_matrixf) <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>K[x]</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>           <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">K =</span> K[x],</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                       <span class="at">design_matrix =</span> design_matrix,</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                       <span class="at">design_matrixf =</span> design_matrixf,</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coefficients =</span> coefficients,</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                       <span class="at">fitted_values =</span> design_matrix <span class="sc">%*%</span> coefficients,</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                       <span class="at">eval_values =</span> design_matrixf <span class="sc">%*%</span> coefficients))</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>           })</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(K),</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>         <span class="fu">data.frame</span>(<span class="at">values =</span> mcycle_fda[[x]]<span class="sc">$</span>eval_values,</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>                    <span class="at">eval_basis =</span> eval_basis,</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>                    <span class="at">x =</span> <span class="fu">factor</span>(K[x],</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> K))</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>       }) <span class="sc">%&gt;%</span> {<span class="fu">do.call</span>(<span class="at">what =</span> rbind,</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>                       <span class="at">args =</span> .)} <span class="sc">%&gt;%</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> eval_basis,</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> values,</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> x,</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> x)) <span class="sc">+</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>)) <span class="sc">+</span></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Time after impact (in "</span>, <span class="fu">italic</span>(<span class="st">"ms"</span>), <span class="st">")"</span>)),</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Acceleration (in "</span>, <span class="fu">italic</span>(<span class="st">"g"</span>), <span class="st">")"</span>))) <span class="sc">+</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  (mcycle <span class="sc">|&gt;</span> <span class="fu">geom_point</span>(<span class="at">inherit.aes =</span> F,</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> times,</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">y =</span> accel)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>           coefficients <span class="ot">=</span> design_matrix <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>             {<span class="fu">solve</span>(<span class="at">a =</span> <span class="fu">t</span>(.) <span class="sc">%*%</span> .,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">b =</span> <span class="fu">t</span>(.) <span class="sc">%*%</span> mcycle<span class="sc">$</span>accel)}</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>           <span class="fu">colnames</span>(design_matrix) <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>K[x]</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>           <span class="fu">colnames</span>(design_matrixf) <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>K[x]</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>           <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">K =</span> K[x],</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                       <span class="at">design_matrix =</span> design_matrix,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                       <span class="at">design_matrixf =</span> design_matrixf,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coefficients =</span> coefficients,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">fitted_values =</span> design_matrix <span class="sc">%*%</span> coefficients,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                       <span class="at">eval_values =</span> design_matrixf <span class="sc">%*%</span> coefficients))</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>           })</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>(<span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(K),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>         <span class="fu">data.frame</span>(<span class="at">values =</span> mcycle_fda[[x]]<span class="sc">$</span>eval_values,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                    <span class="at">eval_x =</span> eval_x,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                    <span class="at">x =</span> <span class="fu">factor</span>(K[x],</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> K))</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>       }) <span class="sc">%&gt;%</span> {<span class="fu">do.call</span>(<span class="at">what =</span> rbind,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>                       <span class="at">args =</span> .)} <span class="sc">%&gt;%</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> eval_x,</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> values,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> x,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> x)) <span class="sc">+</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Time after impact (in "</span>, <span class="fu">italic</span>(<span class="st">"ms"</span>), <span class="st">")"</span>)),</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Acceleration (in "</span>, <span class="fu">italic</span>(<span class="st">"g"</span>), <span class="st">")"</span>)),</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">substitute</span>(<span class="fu">italic</span>(K))) <span class="sc">+</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">type =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="at">n =</span> <span class="dv">6</span>)) <span class="sc">+</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>               <span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  (mcycle <span class="sc">|&gt;</span> <span class="fu">geom_point</span>(<span class="at">inherit.aes =</span> F,</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> times,</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">y =</span> accel)))) <span class="sc">/</span> <span class="fu">guide_area</span>() <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">4</span>, .<span class="dv">25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display page-columns page-full">
 <div id="fig-mcycle" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
@@ -365,12 +402,13 @@ window.Quarto = {
 <img src="ardRepresentation_files/figure-html/fig-mcycle-1.png" class="img-fluid figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mcycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Left panel: sample estimated density of the fat percentage. Right panel: sample boxplot of the fat percentage.
+Figure&nbsp;1: Estimated mean functions for the Motorcycle data set, for <span class="math inline">\(K \in \{5,10,15,20,25,30\}\)</span>. The black dots represent the sampled data, and the dashed red line is represents to <span class="math inline">\(y = 0\)</span>.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>Some remarks can be made with respect to the results of <a href="#fig-mcycle" class="quarto-xref">Figure&nbsp;1</a>: first, we note that for small <span class="math inline">\(K\)</span> (say <span class="math inline">\(K \in \{5,10\}\)</span>), the estimated mean function <span class="math inline">\(\hat{g}(\cdot)\)</span> underfits the data, and is unable to capture localized trends. By contrast, for large <span class="math inline">\(K\)</span> (say <span class="math inline">\(K \in \{25,30\}\)</span>), the estimated mean function overfits the data, extrapolating trends which are potentially spurious. This behavior is expected, and is well known in Statistics as the ‘<em>bias-variance tradeoff</em>’. A more interesting remark can be made after we observe <a href="#fig-mcycle-coef" class="quarto-xref">Figure&nbsp;2</a>, which illustrates the estimated coefficient values <span class="math inline">\(\{\hat{\boldsymbol{\beta}}_\text{ML}\}_k\)</span> for each <span class="math inline">\(K\)</span>.</p>
 <div class="cell page-columns page-full">
 <details class="code-fold">
 <summary>Show <tt>R</tt> code</summary>
@@ -414,19 +452,20 @@ Figure&nbsp;1: Left panel: sample estimated density of the fat percentage. Right
 <span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display page-columns page-full">
-<div id="fig-mcycle-frank" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<div id="fig-mcycle-coef" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-mcycle-frank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ardRepresentation_files/figure-html/fig-mcycle-frank-1.png" class="img-fluid figure-img" width="768">
+<div aria-describedby="fig-mcycle-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ardRepresentation_files/figure-html/fig-mcycle-coef-1.png" class="img-fluid figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mcycle-frank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Estimated coefficients for
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mcycle-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Estimated coefficients for basis expansions of the Motorcycle data set, with <span class="math inline">\(K \in \{5,10,15,20,25,30\}.\)</span>
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell page-columns page-full">
+<p>It is apparent in <a href="#fig-mcycle-coef" class="quarto-xref">Figure&nbsp;2</a>, particularly for larger <span class="math inline">\(K\)</span>, that some coefficients are very close to zero (though they are not zero). Particularly, this occurs to coefficients corresponding to basis functions which model the start of the mean function (around 15<em>ms</em> after impact), and a few of those which model the latter half of the mean function (around 40<em>ms</em> after impact). This yields mean function estimates close to zero (as can be seen in <a href="#fig-mcycle" class="quarto-xref">Figure&nbsp;1</a>)<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Though the coefficient estimates may be small, and likewise do not possess statistical or practical significance, they are nevertheless not zero (except in essentially pathological cases). As such, our model would include all <span class="math inline">\(K\)</span> basis functions. A more efficient estimator would automatically identify basis functions whose significance is below a certain threshold and prune those out of the model, yielding a model with only <span class="math inline">\(K_0 \leq K\)</span> non-zero coefficients, with a comparative performance to the full model. Some procedures for automatic variable selection have been developed, which include the Least Absolute Shrinkage and Selection Operator (LASSO; see <span class="citation" data-cites="tibshirani:1996">Tibshirani (<a href="#ref-tibshirani:1996" role="doc-biblioref">1996</a>)</span>), the Smoothly Clipped Absolute Deviation (SCAD; see <span class="citation" data-cites="fan:2001">Fan and Li (<a href="#ref-fan:2001" role="doc-biblioref">2001</a>)</span>), the Minimax Concave Penalty (MCP; see <span class="citation" data-cites="zhang:2010">Zhang (<a href="#ref-zhang:2010" role="doc-biblioref">2010</a>)</span>) and Automatic Relevance Determination (ARD; see <span class="citation" data-cites="tipping:2001">Tipping (<a href="#ref-tipping:2001" role="doc-biblioref">2001</a>)</span>). In <a href="#sec-app-mcycle" class="quarto-xref">Section&nbsp;2.1</a> of this vignette we illustrate the application of the ARD procedure to the Motorcyle data set.</p>
+<div class="cell fig-cap-location-margin">
 <details class="code-fold">
 <summary>Show <tt>R</tt> code</summary>
 <div class="sourceCode cell-code" id="cb4" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mcycle_basis_plots <span class="ot">=</span></span>
@@ -438,7 +477,7 @@ Figure&nbsp;2: Estimated coefficients for
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">Var3 =</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="at">X =</span> Var2, <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>          .<span class="sc">$</span>coefficients[x]</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        })),</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">evalargs =</span> <span class="fu">rep</span>(eval_basis,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">evalargs =</span> <span class="fu">rep</span>(eval_x,</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">times =</span> <span class="fu">ncol</span>(.<span class="sc">$</span>design_matrixf)),</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">Var2 =</span> <span class="fu">factor</span>(Var2),</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">Var1 =</span> <span class="cn">NULL</span>)} <span class="sc">%&gt;%</span></span>
@@ -460,30 +499,134 @@ Figure&nbsp;2: Estimated coefficients for
 <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">axes =</span> <span class="st">'collect'</span>,</span>
 <span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>              <span class="at">guides =</span> <span class="st">'collect'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display page-columns page-full">
-<div id="fig-mcycle-cool" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
-<figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-mcycle-cool-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ardRepresentation_files/figure-html/fig-mcycle-cool-1.png" class="img-fluid figure-img" width="768">
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mcycle-cool-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Left panel: sample estimated density of the fat percentage. Right panel: sample boxplot of the fat percentage.
+</section>
+<section id="the-canadian-weather-data-set" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-canadian-weather-data-set">The Canadian weather data set</h3>
+<p>The Canadian weather data set (seen in <span class="citation" data-cites="ramsay:2002">J. O. Ramsay and Silverman (<a href="#ref-ramsay:2002" role="doc-biblioref">2002</a>)</span>, and available in the <tt>fda</tt> package in <tt>R</tt>) consists of measurements obtained across <span class="math inline">\(N = 35\)</span> Canadian cities: in particular, we focus on the daily average temperatures for each of these cities, averaged from 1960-1994 (hence, for every city we have <span class="math inline">\(n = 365\)</span> temperature measurements). We denote the day of the measurement as <span class="math inline">\(t_{ij} \in \{1,2,\ldots,365\}\)</span>, and the daily average temperature (in Celsius) as <span class="math inline">\(y_{ij}\)</span>, where the subscript <span class="math inline">\(i \in \{1,2,\ldots,35\}\)</span> indicates the city to which the measurement corresponds, and the subscript <span class="math inline">\(j \in \{1,2,\ldots,365\}\)</span> indicates the day to which the measurement corresponds. Therefore, we denote the full data set as <span class="math inline">\(\{t_{ij},y_{ij}\}^{N,n}_{i = 1,j = 1}\)</span><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Similarly to the Motorcycle data set context, we denote <span class="math inline">\(Y_{ij}\)</span> as the random variable corresponding to the average temperature of the <span class="math inline">\(j\)</span>-th day on the <span class="math inline">\(i\)</span>-th city, and assume that</p>
+<p><span class="math display">\[
+  \mathbb{E}[Y_{ij}] = g_i(t_{ij}) \quad i \in \{1,\ldots,N\}, j \in \{1,\ldots,n\}.
+\]</span> A key difference between this formulation and that which is seen in <a href="#eq-expectation" class="quarto-xref">Equation&nbsp;1</a> is that the mean function is allowed to vary dependent on the city, that is, we assume that the mean daily temperature profile is different in each city<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Again, we’ll assume that <span class="math inline">\(Y_{ij} \sim \text{Normal}(g(t_{ij}), 1/\tau_i), \tau_i &gt; 0\)</span>, or equivalently</p>
+<p><span class="math display">\[
+  y_{ij} = g_i(t_{ij}) + \tau^{-1/2}_i \varepsilon_{ij} \quad i \in \{1,\ldots,N\}, j \in \{1,\ldots,n\},
+\]</span> where <span class="math inline">\(\varepsilon_{ij} \sim \text{Normal}(0,1), i \in \{1,\ldots,N\}, j \in \{1,\ldots,n\}\)</span>. Again we seek to determine estimators <span class="math inline">\(\hat{g}_i(\cdot)\)</span> for the mean temperature functions, and likewise we assume that the mean temperature functions may be decomposed as linear combinations of a set of basis functions <span class="math inline">\(\{\phi_k(\cdot)\}_{k = 1}^K\)</span> of the form <span class="math display">\[
+  g_i(t) = \sum^K_{k = 1}\beta_{ik} \phi_k(t),
+\]</span> for some <span class="math inline">\(\boldsymbol{\beta}_i \in \mathbb{R}^K\)</span>. Let <span class="math inline">\(\boldsymbol{\Phi}_i \in \mathbb{R}^{K \times K}\)</span> and <span class="math inline">\(\boldsymbol{\phi}_i(t) \in \mathbb{R}^K\)</span> be defined as <span class="math display">\[
+  \boldsymbol{\Phi}_i = \begin{pmatrix}
+    \phi_{1}(t_{i1}) &amp; \phi_{2}(t_{i1}) &amp; \dots &amp; \phi_{K}(t_{i1}) \\
+    \phi_{1}(t_{i2}) &amp; \phi_{2}(t_{i2}) &amp; \dots &amp; \phi_{K}(t_{i2}) \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    \phi_{1}(t_{in}) &amp; \phi_{2}(t_{in}) &amp; \dots &amp; \phi_{K}(t_{in})
+  \end{pmatrix} \quad \text{and} \quad \boldsymbol{\phi}_i(t) = \begin{pmatrix}
+    \phi_1(t) \\
+    \phi_2(t) \\
+    \vdots \\
+    \phi_K(t)
+  \end{pmatrix}.
+\]</span> Analogously to previous results, we find that the maximum likelihood estimators of the coefficients <span class="math inline">\(\boldsymbol{\beta}_i\)</span> are <span class="math display">\[
+  \{\hat{\boldsymbol{\beta}}_\text{ML}\}_i = (\boldsymbol{\Phi}_i^\text{T}\boldsymbol{\Phi}_i)^{-1}\boldsymbol{\Phi}^\text{T}_i\mathrm{y}_i \quad i \in \{1,\ldots,N\},
+\]</span> assuming <span class="math inline">\(\boldsymbol{\Phi}_i^\text{T} \boldsymbol{\Phi}_i\)</span> is positive-definite for <span class="math inline">\(i \in \{1,\ldots,N\}\)</span>. We again adopt the cubic B-spline framework for the set of basis functions, utilizing equidistant knots (starting at <span class="math inline">\(1\)</span> and ending at <span class="math inline">\(365\)</span>), such that the corresponding basis function set is composed of <span class="math inline">\(K = 30\)</span> basis functions. The estimated mean functions, as well as the original observed data, are plotted in <a href="#fig-canadian-weather" class="quarto-xref">Figure&nbsp;3</a>.</p>
+<div class="cell page-columns page-full">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb5" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>K_canadian <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>eval_x_canadian <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">365</span>, <span class="at">length.out =</span> <span class="fl">1e3</span> <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>canadianWeather_fda <span class="ot">=</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(CanadianWeather<span class="sc">$</span>place),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>           design_basis <span class="ot">=</span> <span class="fu">create.bspline.basis</span>(<span class="at">rangeval =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">365</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">norder =</span> <span class="dv">4</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">nbasis =</span> K_canadian)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>           design_matrix <span class="ot">=</span> design_basis <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">getbasismatrix</span>(<span class="at">evalarg =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">basisobj =</span> .,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                            <span class="at">nderiv =</span> <span class="dv">0</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>           design_matrixf <span class="ot">=</span> design_basis <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>             <span class="fu">getbasismatrix</span>(<span class="at">evalarg =</span> eval_x_canadian,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">basisobj =</span> .,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">nderiv =</span> <span class="dv">0</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>           coefficients <span class="ot">=</span> design_matrix <span class="sc">%&gt;%</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>             {<span class="fu">solve</span>(<span class="at">a =</span> <span class="fu">t</span>(.) <span class="sc">%*%</span> .,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">b =</span> <span class="fu">t</span>(.) <span class="sc">%*%</span> CanadianWeather<span class="sc">$</span>dailyAv[ , x , <span class="dv">1</span>])}</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>           <span class="fu">colnames</span>(design_matrix) <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>K_canadian</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>           <span class="fu">colnames</span>(design_matrixf) <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>K_canadian</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>           <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">K =</span> K_canadian,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">design_matrix =</span> design_matrix,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                       <span class="at">design_matrixf =</span> design_matrixf,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coefficients =</span> coefficients,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                       <span class="at">fitted_values =</span> design_matrix <span class="sc">%*%</span> coefficients,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>                       <span class="at">eval_values =</span> design_matrixf <span class="sc">%*%</span> coefficients,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>                       <span class="at">place =</span> CanadianWeather<span class="sc">$</span>place[x],</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>                       <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>))</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>           })</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>(<span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(CanadianWeather<span class="sc">$</span>place),</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>         <span class="fu">data.frame</span>(<span class="at">values =</span> canadianWeather_fda[[x]]<span class="sc">$</span>eval_values,</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>                    <span class="at">eval_x =</span> eval_x_canadian,</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>                    <span class="at">x =</span> <span class="fu">factor</span>(CanadianWeather<span class="sc">$</span>place[x],</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">unique</span>(CanadianWeather<span class="sc">$</span>place)))</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>       }) <span class="sc">%&gt;%</span> {<span class="fu">do.call</span>(<span class="at">what =</span> rbind,</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>                       <span class="at">args =</span> .)} <span class="sc">%&gt;%</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> eval_x,</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> values,</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> x,</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> x)) <span class="sc">+</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Day of the year"</span>,</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Temperature (in "</span>, <span class="fu">italic</span>(<span class="st">"°C"</span>), <span class="st">")"</span>))) <span class="sc">+</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">type =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="at">n =</span> <span class="dv">35</span>)) <span class="sc">+</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">365</span>)) <span class="sc">+</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(CanadianWeather<span class="sc">$</span>place),</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>       <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>         <span class="fu">data.frame</span>(<span class="at">values =</span> CanadianWeather<span class="sc">$</span>dailyAv[ , x , <span class="dv">1</span>],</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>                    <span class="at">eval_x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>,</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>                    <span class="at">x =</span> <span class="fu">factor</span>(CanadianWeather<span class="sc">$</span>place[x],</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">unique</span>(CanadianWeather<span class="sc">$</span>place)))</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>       }) <span class="sc">%&gt;%</span> {<span class="fu">do.call</span>(<span class="at">what =</span> rbind,</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>                       <span class="at">args =</span> .)} <span class="sc">%&gt;%</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F,</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .,</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> eval_x,</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> values,</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group =</span> x,</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col =</span> x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-canadian-weather" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-canadian-weather-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ardRepresentation_files/figure-html/fig-canadian-weather-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-canadian-weather-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Estimated mean functions for each city in the Canadian weather data set, with <span class="math inline">\(K = 30\)</span>. The original observed data are likewise plotted.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>Note that, unlike the Motorcycle data set, the observed functions do not clutter around <span class="math inline">\(y = 0\)</span> as significantly, hence we do not necessarily believe the underlying representation of the data to be much sparser than that which is obtained using <span class="math inline">\(K = 30\)</span> basis functions. Nevertheless, we believe this application may be of interest should it reveal a common structure in the way in which the sparseness manifests for the observed functions.</p>
 </section>
-<section id="the-canadian-weather-data-set" class="level3">
-<h3 class="anchored" data-anchor-id="the-canadian-weather-data-set">The Canadian weather data set</h3>
-<p>The Canadian weather data set</p>
-</section>
-<section id="simulated-data" class="level3">
+<section id="simulated-data" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="simulated-data">Simulated data</h3>
-<p><span class="math display">\[
-  y_i(t_{i,j}) = \cos(t_{i,j}) + \sin(2 t_{i,j}) + \varepsilon_{i}(t_{i,j})
-\]</span> and <span class="math display">\[
-  y_i(t_{i,j}) = \begin{pmatrix}
+<p>In addition to the two data sets presented above, we also consider two distinct scenarios of simulated data. Firstly, we consider data comprised of <span class="math inline">\(N\)</span> functions sampled <span class="math inline">\(n\)</span> times each, generated from a cubic B-spline basis set of functions, with equidistant knots starting at <span class="math inline">\(0\)</span> and ending at <span class="math inline">\(1\)</span>, such that we have 10 basis functions, however only 6 have non-zero true coefficients. The sampling design is regular (see the footnotes) in the interval <span class="math inline">\([0,1]\)</span>. Out goal with this simulation is to determine the accuracy of the estimated coefficients for the ARD procedure. The data is generated as follows</p>
+<p><span id="eq-simulation-i"><span class="math display">\[
+  y_{ij} = \boldsymbol{\phi}^\text{T}(t_{ij})\begin{pmatrix}
     -2 \\
     0 \\
     3/2 \\
@@ -494,43 +637,466 @@ Figure&nbsp;3: Left panel: sample estimated density of the fat percentage. Right
     -1 \\
     0 \\
     0
-  \end{pmatrix}\textbf{B}(t_{i,j}) + \varepsilon_i(t_{i,j})
-\]</span></p>
+  \end{pmatrix} + \tau^{-1/2}\varepsilon_{ij},
+\tag{5}\]</span></span> where <span class="math inline">\(\boldsymbol{\phi}(t)\)</span> is as in <a href="#eq-matrix" class="quarto-xref">Equation&nbsp;4</a> and <span class="math inline">\(\tau = 25\)</span>.</p>
+<div class="cell page-columns page-full">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb6" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">23121998</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>replication_1 <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>N_1 <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>n_1 <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>t_1 <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> n_1)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>tau_1 <span class="ot">=</span> .<span class="dv">2</span> <span class="sc">**</span> <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>K_1 <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>beta_1 <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span><span class="sc">/</span><span class="dv">2</span>, <span class="dv">3</span><span class="sc">/</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>sim_data_1 <span class="ot">=</span> <span class="fu">lapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span>N_1,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                      design_basis <span class="ot">=</span> <span class="fu">create.bspline.basis</span>(<span class="at">rangeval =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">norder =</span> <span class="dv">4</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">nbasis =</span> K_1)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                      design_matrix <span class="ot">=</span> design_basis <span class="sc">%&gt;%</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">getbasismatrix</span>(<span class="at">evalarg =</span> t_1,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">basisobj =</span> .,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">nderiv =</span> <span class="dv">0</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                      y <span class="ot">=</span> design_matrix <span class="sc">%*%</span> beta_1 <span class="sc">+</span> (tau_1 <span class="sc">**</span> (<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)) <span class="sc">*</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n_1)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">return</span>(y)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                    })</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>(<span class="fu">lapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span>N_1,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>          <span class="fu">data.frame</span>(<span class="at">x =</span> t_1,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> sim_data_1[[x]],</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ind =</span> <span class="fu">factor</span>(x, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span>N_1))</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        })) <span class="sc">%&gt;%</span> <span class="fu">do.call</span>(<span class="at">what =</span> rbind,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>                        <span class="at">args =</span> .) <span class="sc">|&gt;</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> y,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> ind,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> ind)) <span class="sc">+</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(t)[ij])),</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(y)[ij]))) <span class="sc">+</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">type =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="at">n =</span> N_1)) <span class="sc">+</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>),</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1/2"</span>, <span class="st">"1"</span>)) <span class="sc">+</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-simulation-i-data" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-simulation-i-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ardRepresentation_files/figure-html/fig-simulation-i-data-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-simulation-i-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: <span class="math inline">\(N = 100\)</span> functions sampled at <span class="math inline">\(n = 100\)</span> instants according to <a href="#eq-simulation-i" class="quarto-xref">Equation&nbsp;5</a>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For the second simulation, we generated functional data whose mean curve is the sum of two trigonometric functions.</p>
+<p><span id="eq-simulation-ii"><span class="math display">\[
+  y_{ij} = \cos(t_{ij}) + \sin(2 t_{ij}) + \tau^{-1/2}\varepsilon_{ij}
+\tag{6}\]</span></span></p>
+<div class="cell page-columns page-full">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb7" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12231998</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>replication_2 <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>N_2 <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>n_2 <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>t_2 <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> n_2)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>tau_2 <span class="ot">=</span> .<span class="dv">2</span> <span class="sc">**</span> <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>sim_data_2 <span class="ot">=</span> <span class="fu">lapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span>N_2,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                      y <span class="ot">=</span> <span class="fu">cos</span>(t_2) <span class="sc">+</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> t_2) <span class="sc">+</span> (tau_2 <span class="sc">**</span> (<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)) <span class="sc">*</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n_2)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">return</span>(y)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                    })</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>(<span class="fu">lapply</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span>N_2,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>          <span class="fu">data.frame</span>(<span class="at">x =</span> t_2,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> sim_data_2[[x]],</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ind =</span> <span class="fu">factor</span>(x, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span>N_2))</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        })) <span class="sc">%&gt;%</span> <span class="fu">do.call</span>(<span class="at">what =</span> rbind,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                        <span class="at">args =</span> .) <span class="sc">|&gt;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> y,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> ind,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> ind)) <span class="sc">+</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(t)[ij])),</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(y)[ij]))) <span class="sc">+</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">type =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="at">n =</span> N_1)) <span class="sc">+</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, pi, <span class="dv">2</span> <span class="sc">*</span> pi),</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">expression</span>(<span class="st">"0"</span>, pi, <span class="fu">paste</span>(<span class="st">"2"</span>, pi))) <span class="sc">+</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-simulation-ii-data" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-simulation-ii-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ardRepresentation_files/figure-html/fig-simulation-ii-data-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-simulation-ii-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: <span class="math inline">\(N = 100\)</span> functions sampled at <span class="math inline">\(n = 100\)</span> instants according to <a href="#eq-simulation-ii" class="quarto-xref">Equation&nbsp;6</a>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>This vignette is primarily concerned with presenting an approach to sparse Functional Data representation utilizing the Automatic Relevance Determination (ARD) framework, itself only a topic in the wider Sparse Bayesian Learning (SBL) context. More precisely, our aim herein is to replicate some of the studies in <span class="citation" data-cites="sousa:2024">Sousa, Souza, and Dias (<a href="#ref-sousa:2024" role="doc-biblioref">2024</a>)</span> and <span class="citation" data-cites="daCruz:2024">Cruz, Souza, and Sousa (<a href="#ref-daCruz:2024" role="doc-biblioref">2024</a>)</span> (the former moreso than the latter, as we do not account for any correlation structure in the curves). The goal of these previous studies was to provide an adaptive Bayesian procedure to select the bases for functional data representation, the latter also extending the results of the former by including a correlation structure for the functional data, and delineating an estimation procedure utilizing the Variational Bayes (VB) approach. It did so by including a collection of Bernoulli random variables (denoted <span class="math inline">\(Z_{ki}\)</span>), each associated with one particular term in the basis expansion in <a href="#eq-expansion" class="quarto-xref">Equation&nbsp;1</a> in the form <span class="math inline">\(\tilde{\beta}_{ki} = Z_{ki} \beta_{ki}\)</span>, such that <span class="math inline">\(\mathbb{P}(\tilde{\beta}_{ki} = 0) &gt; 0\)</span>.</p>
-<p><span class="math display">\[
-  \mathbf{\beta} \sim \text{Normal}(0_K,\textbf{A}).
-\]</span> where <span class="math inline">\(\textbf{A} = \text{diag}(\alpha_i)\)</span>. For further detailing and intuition on the inner workings of the ARD approach, we refer the reader to <span class="citation" data-cites="tipping:2001">Tipping (<a href="#ref-tipping:2001" role="doc-biblioref">2001</a>)</span></p>
+<p>This vignette is primarily concerned with presenting an approach to sparse representation of Functional Data utilizing the Automatic Relevance Determination (ARD) framework, itself only a topic in the wider Sparse Bayesian Learning (SBL) context. More precisely, our aim herein is to replicate some of the studies in <span class="citation" data-cites="sousa:2024">Sousa, Souza, and Dias (<a href="#ref-sousa:2024" role="doc-biblioref">2024</a>)</span> and <span class="citation" data-cites="daCruz:2024">Cruz, Souza, and Sousa (<a href="#ref-daCruz:2024" role="doc-biblioref">2024</a>)</span> (the former moreso than the latter, as we do not account for any correlation structure in the functions). The goal of these previous studies was to provide an adaptive Bayesian procedure to select the bases for functional data representation, the latter also extending the results of the former by including a correlation structure for the functional data, and delineating an estimation procedure utilizing the Variational Bayes (VB) approach. It did so by including a collection of Bernoulli random variables (denoted <span class="math inline">\(Z_{k}\)</span>), each associated with one particular term in the basis expansion in <a href="#eq-expansion" class="quarto-xref">Equation&nbsp;3</a>, resulting in the form <span class="math inline">\(\tilde{\beta}_{k} = Z_{k} \beta_{k}\)</span>, such that <span class="math inline">\(\mathbb{P}(\tilde{\beta}_{k} = 0) &gt; 0\)</span>. The ARD appraoch, which is presented subsequently, similarly works as Bayesian model.</p>
+<section id="automatic-relevance-determination" class="level3">
+<h3 class="anchored" data-anchor-id="automatic-relevance-determination">Automatic Relevance Determination</h3>
+<p>The ARD approach attributes the following hierarchical Bayesian model:</p>
 <p><span class="math display">\[
   \begin{aligned}
-    \Sigma &amp; = (\textbf{A} + \beta \Phi^\top \Phi)^{-1} \\
-    &amp; = \textbf{A}^{-1} - \textbf{A}^{-1}\Phi^\top(\mathbb{I}_N + \beta \Phi \textbf{A}^{-1} \Phi^\top )^{-1}\Phi \textbf{A}^{-1}
+    y(t_{j}) \vert \{\beta_{k}\}, \tau &amp; \sim \text{Normal}\Bigg(\sum^K_{k = 1}\beta_{k}\phi_k(t_{j}), \tau^{-1}\Bigg) &amp; j \in \{1,\ldots,n\} \\
+    {\beta}_{k} \vert  \alpha_{k} &amp; \sim \text{Normal}(0,\alpha_{k}^{-1}) &amp; k \in \{1,\ldots,K\}.
   \end{aligned}
-\]</span></p>
+\]</span> Where <span class="math inline">\(\{\alpha_{k}\}\)</span> (greater than zero) are hyperparameters which dictate the concentration of the coefficients around zero, whilst <span class="math inline">\(\tau\)</span> (also greater than zero) is a hyperparameter which dictates the precision of the sampled observations. In adopting the empirical Bayes approach to estimate the model, we aim to determine the hyperparameters values which maximize the distribution of the observations points marginalized over the coefficients <span class="math inline">\(\{\beta_{k}\}\)</span>. <span class="citation" data-cites="tipping:2001">Tipping (<a href="#ref-tipping:2001" role="doc-biblioref">2001</a>)</span> proposes a straightforward set of update equations for the hyperparameters (as well as for the coefficients, which are estimated via their maximum a posteriori value). These are as follows:</p>
+<p><span id="eq-beta"><span class="math display">\[
+  \hat{\boldsymbol{\beta}} = \hat{\tau} \boldsymbol{\Sigma}\Phi^\text{T}\mathrm{y}
+\tag{7}\]</span></span></p>
+<p><span id="eq-alpha"><span class="math display">\[
+  \hat{\alpha}_k = \frac{\gamma_k}{\hat{\beta}_k^2}
+\tag{8}\]</span></span></p>
+<p><span id="eq-tau"><span class="math display">\[
+  \frac{1}{\hat{\tau}} = \frac{\lvert\lvert \textbf{y} - \Phi \hat{\boldsymbol{\beta}}\rvert\rvert^2}{n - \sum^K_{k = 1}\gamma_{k}} \quad k \in \{1,\ldots,K\}
+\tag{9}\]</span></span></p>
+<p>where</p>
+<p><span id="eq-sigma"><span class="math display">\[
+  \boldsymbol{\Sigma} = (\text{diag}(\hat{\alpha}) + \hat{\tau} \boldsymbol{\Phi}^\text{T}\boldsymbol{\Phi})^{-1}
+\tag{10}\]</span></span></p>
+<p><span id="eq-gamma"><span class="math display">\[
+  \gamma_{k} = 1 - \hat{\alpha}_{k}\Sigma_{kk} \quad k \in \{1,\ldots,K\}.
+\tag{11}\]</span></span></p>
+<p><span class="citation" data-cites="tipping:2001">Tipping (<a href="#ref-tipping:2001" role="doc-biblioref">2001</a>)</span> likewise demonstrates that, under certain circumstances, <span class="math inline">\(\hat{\alpha}_k \approx \infty\)</span>, under which condition the prior distribution of <span class="math inline">\(\beta_k \vert \alpha_k\)</span> is approximately degenerate at 0 (as is the consequent posterior). We provide an algorithm for the estimation of an ARD model, given the above updating equations:</p>
+<div class="algo-class">
+<p><span class="smallcaps">Initialization</span>. Enter a valid response vector <span class="math inline">\(\mathrm{y}\)</span> and a valid predictor matrix <span class="math inline">\(\boldsymbol{\Phi}\)</span>. Set a cutoff value <span class="math inline">\(M &gt; 0\)</span> such that, if <span class="math inline">\(\hat{\alpha}_k &gt; M\)</span>, <span class="math inline">\(\hat{\beta}_k = 0\)</span>. Set initial values for the estimators <span class="math inline">\(\hat{\tau} = \tau_0\)</span> and <span class="math inline">\(\hat{\alpha} = \alpha_0\)</span>.</p>
+<ol type="1">
+<li>Compute the quantities in <a href="#eq-sigma" class="quarto-xref">Equation&nbsp;10</a> and <a href="#eq-gamma" class="quarto-xref">Equation&nbsp;11</a>.</li>
+<li>Update <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> according to <a href="#eq-beta" class="quarto-xref">Equation&nbsp;7</a>.</li>
+<li>Update <span class="math inline">\(\hat{\alpha}_k\)</span> and <span class="math inline">\(\hat{\tau}\)</span> according to <a href="#eq-alpha" class="quarto-xref">Equation&nbsp;8</a> and <a href="#eq-tau" class="quarto-xref">Equation&nbsp;9</a>.</li>
+<li>For every <span class="math inline">\(k \in \{1,\ldots,K\}\)</span> if <span class="math inline">\(\hat{\alpha}_{k} &gt; M\)</span>, set <span class="math inline">\(\hat{\beta}_{k} = 0\)</span> and <span class="math inline">\(\hat{\alpha}_k = \infty\)</span>.</li>
+<li>Check the convergence of the estimates. If convergence has occurred, stop. Else, return to step (1).</li>
+</ol>
+</div>
+<p>The function <tt>ard_model()</tt> in the chunk below performs the estimating procedure.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ard_model <span class="ot">=</span> <span class="cf">function</span>(y,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                     Phi,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tau_ini =</span> <span class="dv">1</span>,                             </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">alpha_ini =</span> <span class="fu">rep</span>(<span class="at">x =</span> <span class="dv">1</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">times =</span> <span class="fu">ncol</span>(Phi)),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">max_iter =</span> <span class="fl">1e3</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tol =</span> <span class="fl">1e-8</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cutoff =</span> <span class="fl">1e4</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(y)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  K <span class="ot">=</span> <span class="fu">ncol</span>(Phi)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  tau <span class="ot">=</span> tau_ini</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  alpha <span class="ot">=</span> alpha_ini</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  keep <span class="ot">=</span> <span class="sc">!</span><span class="fu">logical</span>(K)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  beta_est <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">times =</span> K)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  gamma_est <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">times =</span> K)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  iter <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  cond <span class="ot">=</span> <span class="cn">Inf</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  beta_est0 <span class="ot">=</span> beta_est <span class="sc">+</span> <span class="cn">Inf</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>((iter <span class="sc">&lt;</span> max_iter) <span class="sc">&amp;</span> (<span class="fu">abs</span>(cond) <span class="sc">&gt;</span> tol))</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    Phi_keep <span class="ot">=</span> Phi[,keep]</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    A <span class="ot">=</span> <span class="fu">diag</span>(alpha[keep])</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    Sigma <span class="ot">=</span> <span class="fu">solve</span>(A <span class="sc">+</span> tau <span class="sc">*</span> <span class="fu">t</span>(Phi_keep) <span class="sc">%*%</span> Phi_keep)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    beta_est[keep] <span class="ot">=</span> tau <span class="sc">*</span> Sigma <span class="sc">%*%</span> <span class="fu">t</span>(Phi_keep) <span class="sc">%*%</span> y</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    gamma_est[keep] <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> alpha[keep] <span class="sc">*</span> <span class="fu">diag</span>(Sigma)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    alpha[keep] <span class="ot">=</span> gamma_est[keep] <span class="sc">/</span> (beta_est[keep] <span class="sc">**</span> <span class="dv">2</span>)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    tau <span class="ot">=</span> (n <span class="sc">-</span> <span class="fu">sum</span>(gamma_est[keep])) <span class="sc">/</span> <span class="fu">sum</span>((y <span class="sc">-</span> Phi_keep <span class="sc">%*%</span> beta_est[keep]) <span class="sc">**</span> <span class="dv">2</span>)</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    keep <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="at">test =</span> alpha <span class="sc">&lt;</span> cutoff, <span class="at">yes =</span> T, <span class="at">no =</span> F)</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    beta_est[<span class="sc">!</span>keep] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    alpha[<span class="sc">!</span>keep] <span class="ot">=</span> <span class="cn">Inf</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    iter <span class="sc">%&lt;&gt;%</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    cond <span class="ot">=</span> <span class="fu">sum</span>((beta_est <span class="sc">-</span> beta_est0) <span class="sc">**</span> <span class="dv">2</span>) </span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    beta_est0 <span class="ot">=</span> beta_est</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>  time <span class="sc">%&lt;&gt;%</span> {<span class="fu">Sys.time</span>() <span class="sc">-</span> .}</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">iter =</span> iter,</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> alpha[keep],</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>              <span class="at">beta =</span> beta_est[keep],</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>              <span class="at">gamma =</span> gamma_est[keep],</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>              <span class="at">keep =</span> <span class="fu">which</span>(keep),</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>              <span class="at">time =</span> time,</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>              <span class="at">fitted_values =</span> Phi[,keep] <span class="sc">%*%</span> beta_est[keep]))</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><span class="citation" data-cites="bishop:2006">Bishop (<a href="#ref-bishop:2006" role="doc-biblioref">2006</a>)</span> suggests utilizing <span class="math inline">\(\{\gamma_k\}\)</span>, defined in <a href="#eq-gamma" class="quarto-xref">Equation&nbsp;11</a>, as a measure of the model complexity, defining the effective degrees of freedom of the model as <span class="math display">\[
+  p_\text{eff} = \sum^K_{k = 1}\gamma_k,
+\]</span> where, if the <span class="math inline">\(k\)</span>-th coefficient is included in the model, <span class="math inline">\(\gamma_k \in [0,1]\)</span>, whereas if is not included, <span class="math inline">\(\gamma_k = 0\)</span>.</p>
+</section>
+</section>
+</section>
+<section id="applications-and-simulations" class="level1 page-columns page-full">
+<h1>Applications and Simulations</h1>
+<section id="sec-app-mcycle" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-app-mcycle">Application I</h2>
+<div class="cell page-columns page-full">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb9" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ind <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mcycle_ard <span class="ot">=</span> <span class="fu">ard_model</span>(<span class="at">y =</span> mcycle<span class="sc">$</span>accel,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Phi =</span> mcycle_fda[[ind]]<span class="sc">$</span>design_matrix,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cutoff =</span> <span class="fl">1e-2</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>(mcycle_ard <span class="sc">%&gt;%</span> {<span class="fu">data.frame</span>(<span class="at">eval_x =</span> eval_x,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">eval_values =</span> mcycle_fda[[ind]]<span class="sc">$</span>design_matrixf[,.<span class="sc">$</span>keep] <span class="sc">%*%</span> .<span class="sc">$</span>beta)} <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> eval_x,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> eval_values)) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  (mcycle <span class="sc">|&gt;</span> <span class="fu">geom_point</span>(<span class="at">inherit.aes =</span> F,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> times,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">y =</span> accel))) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  (mcycle_fda[[ind]] <span class="sc">%&gt;%</span> {<span class="fu">data.frame</span>(<span class="at">eval_x =</span> eval_x,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">eval_values =</span> .<span class="sc">$</span>design_matrixf <span class="sc">%*%</span> .<span class="sc">$</span>coefficients)} <span class="sc">|&gt;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>     <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> eval_x,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                             <span class="at">y =</span> eval_values),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>               <span class="at">col =</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>)) <span class="sc">+</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Time after impact (in "</span>, <span class="fu">italic</span>(<span class="st">"ms"</span>), <span class="st">")"</span>)),</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Acceleration (in "</span>, <span class="fu">italic</span>(<span class="st">"g"</span>), <span class="st">")"</span>))) <span class="sc">+</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>               <span class="at">yintercept =</span> <span class="dv">0</span>)) <span class="sc">/</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>(coef_plots[[ind]]<span class="sc">$</span>g <span class="sc">+</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>)) <span class="sc">+</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>  (mcycle_ard <span class="sc">%&gt;%</span> {<span class="fu">data.frame</span>(<span class="at">x =</span> .<span class="sc">$</span>keep,</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>                              <span class="at">y =</span> .<span class="sc">$</span>beta) <span class="sc">|&gt;</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="at">inherit.aes =</span> F,</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> y),</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col =</span> <span class="st">"red"</span>)})) <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">nrow</span>(mcycle)</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">length</span>(mcycle_ard<span class="sc">$</span>keep)</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>R2_adj <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> ((n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> (n <span class="sc">-</span> <span class="fu">sum</span>(mcycle_ard<span class="sc">$</span>gamma))) <span class="sc">*</span> <span class="fu">sum</span>((mcycle_ard<span class="sc">$</span>fitted_values <span class="sc">-</span> mcycle<span class="sc">$</span>accel) <span class="sc">**</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>((<span class="fu">mean</span>(mcycle<span class="sc">$</span>accel) <span class="sc">-</span> mcycle<span class="sc">$</span>accel) <span class="sc">**</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-mcycle-ard" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-mcycle-ard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ardRepresentation_files/figure-html/fig-mcycle-ard-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-mcycle-ard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Left panel: sample estimated density of the fat percentage. Right panel: sample boxplot of the fat percentage.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Resulting in <span class="math inline">\(R^2_{\text{adj}} \approx 0.7864\)</span></p>
+</section>
+<section id="application-ii" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="application-ii">Application II</h2>
+<div class="cell page-columns page-full">
+<details class="code-fold">
+<summary>Show <tt>R</tt> code</summary>
+<div class="sourceCode cell-code" id="cb10" data-cap-location="margin"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>canadianWeather_ard <span class="ot">=</span> <span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(CanadianWeather<span class="sc">$</span>place),</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">ard_model</span>(<span class="at">y =</span> CanadianWeather<span class="sc">$</span>dailyAv[ , x, <span class="dv">1</span>],</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Phi =</span> canadianWeather_fda[[x]]<span class="sc">$</span>design_matrix,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">cutoff =</span> <span class="fl">1e1</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                             })</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>(canadianWeather_ard <span class="sc">%&gt;%</span> {<span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(CanadianWeather<span class="sc">$</span>place),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>          <span class="fu">data.frame</span>(<span class="at">eval_x =</span> eval_x_canadian,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> canadianWeather_fda[[x]]<span class="sc">$</span>design_matrixf[,.[[x]]<span class="sc">$</span>keep] <span class="sc">%*%</span> .[[x]]<span class="sc">$</span>beta,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">x =</span> <span class="fu">factor</span>(CanadianWeather<span class="sc">$</span>place[x],</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">unique</span>(CanadianWeather<span class="sc">$</span>place)))</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        })} <span class="sc">%&gt;%</span> {<span class="fu">do.call</span>(<span class="at">what =</span> rbind,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">args =</span> .)} <span class="sc">%&gt;%</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> .,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> eval_x,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> values,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> x,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col =</span> x)) <span class="sc">+</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">unit</span>(<span class="dv">11</span>, <span class="st">"pt"</span>),</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"LM Roman 10"</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>                            <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.08</span>, <span class="st">"cm"</span>), </span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">ends =</span> <span class="st">"last"</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">angle =</span> <span class="dv">30</span>,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">type =</span> <span class="st">"closed"</span>),</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">linewidth =</span> .<span class="dv">25</span>),</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">linewidth =</span> .<span class="dv">125</span>),</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Day of the year"</span>,</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">substitute</span>(<span class="fu">paste</span>(<span class="st">"Temperature (in "</span>, <span class="fu">italic</span>(<span class="st">"°C"</span>), <span class="st">")"</span>))) <span class="sc">+</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">type =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="at">n =</span> <span class="dv">35</span>)) <span class="sc">+</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">365</span>)) <span class="sc">+</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(CanadianWeather<span class="sc">$</span>place),</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>       <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>         <span class="fu">data.frame</span>(<span class="at">values =</span> CanadianWeather<span class="sc">$</span>dailyAv[ , x , <span class="dv">1</span>],</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>                    <span class="at">eval_x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>,</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>                    <span class="at">x =</span> <span class="fu">factor</span>(CanadianWeather<span class="sc">$</span>place[x],</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">unique</span>(CanadianWeather<span class="sc">$</span>place)))</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>       }) <span class="sc">%&gt;%</span> {<span class="fu">do.call</span>(<span class="at">what =</span> rbind,</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>                       <span class="at">args =</span> .)} <span class="sc">%&gt;%</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F,</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> .,</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>            <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> eval_x,</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> values,</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group =</span> x,</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col =</span> x)))</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>time_canadian_ARD <span class="ot">=</span> canadianWeather_ard <span class="sc">%&gt;%</span> {<span class="fu">lapply</span>(<span class="at">X =</span> <span class="fu">seq_along</span>(CanadianWeather<span class="sc">$</span>place), <span class="at">FUN =</span> <span class="cf">function</span>(x){.[[x]]<span class="sc">$</span>time})} <span class="sc">|&gt;</span> <span class="fu">unlist</span>() <span class="sc">|&gt;</span> <span class="fu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display page-columns page-full">
+<div id="fig-canadian-ard" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-canadian-ard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ardRepresentation_files/figure-html/fig-canadian-ard-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-canadian-ard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Estimated mean functions for each city in the Canadian weather data set, with <span class="math inline">\(K = 30\)</span>. The original observed data are likewise plotted.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that the ARD estimation procedure for all functions took approximately 0.2905 seconds.</p>
+</section>
+<section id="simulation-study-i" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-study-i">Simulation Study I</h2>
+</section>
+<section id="simulation-study-ii" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-study-ii">Simulation Study II</h2>
 <hr>
-</section>
-</section>
-<section id="relevance-vector-machines-for-regression" class="level1">
-<h1>Relevance Vector Machines for Regression</h1>
-<p><span class="math display">\[
-  q_i = \frac{\alpha_i Q_i}{\alpha_i - S_i}
-\]</span> and <span class="math display">\[
-  s_i = \frac{\alpha_i S_i}{\alpha_i - S_i}
-\]</span></p>
-<section id="fixed-point-updates" class="level2">
-<h2 class="anchored" data-anchor-id="fixed-point-updates">Fixed Point Updates</h2>
-<p>A</p>
-</section>
-<section id="expectation-maximization-approach" class="level2">
-<h2 class="anchored" data-anchor-id="expectation-maximization-approach">Expectation Maximization Approach</h2>
-<p>B</p>
 </section>
 </section>
 <section id="concluding-remarks" class="level1">
 <h1>Concluding Remarks</h1>
+<p><span class="math display">\[
+  \begin{aligned}
+    y_{i}(t_{ij}) \vert \{\beta_{ki}\}, \tau_i &amp; \sim \text{Normal}\Bigg(\sum^K_{k = 1}\beta_{ki}\textbf{B}_k(t_{ij}), \tau^{-1}_i\Bigg) &amp; i \in \{1,\ldots,N\}, j \in \{1,\ldots,n_i\} \\
+    {\beta}_{ki} \vert  \alpha_{ki} &amp; \sim \text{Normal}(0,\alpha_{ki}^{-1}) &amp; k \in \{1,\ldots,K\}, i \in \{1,\ldots,N\} \\
+    \alpha_{ki} &amp; \sim \text{Gamma}(a_0, b_0) &amp; k \in \{1,\ldots,K\}, i \in \{1,\ldots,N\} \\
+    \tau_i &amp; \sim \text{Gamma}(c_0, d_0) &amp; i \in \{1,\ldots,N\}.
+  \end{aligned}
+\]</span></p>
+<div class="cell" data-output.var="ard_model">
+<details class="code-fold">
+<summary>Show <tt>stan</tt> code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> &lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N; <span class="co">// number of data items</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> &lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; K; <span class="co">// dimension of input features</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">matrix</span>[N,K]   x; <span class="co">// input matrix</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[N]     y; <span class="co">// output vector</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// hyperparameters for Gamma priors</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> &lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; a0;</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> &lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; b0;</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> &lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; c0;</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> &lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; d0;</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[K] b;               <span class="co">// weights (coefficients) vector</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> &lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; tau;     <span class="co">// precision</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span> &lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; [K]alpha; <span class="co">// hyper-parameters on weights</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="kw">transformed parameters</span> {</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> one_over_tau;</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[K] one_over_alpha; <span class="co">// numerical stability</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  one_over_tau &lt;- <span class="dv">1</span>/tau;</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span>:K){</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    one_over_alpha[i] &lt;- <span class="dv">1</span>/alpha[i];</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// alpha: hyper-prior on weights</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  alpha ~ gamma(a0, b0);</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">//tau: prior on precision</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  tau ~ gamma(c0, d0);</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">//b: prior on weights</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  b ~ normal(<span class="dv">0</span>, one_over_alpha);</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">//y: likelihood</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  y ~ normal(x * b, one_over_tau);</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>} </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="references" class="level1">
 
@@ -539,6 +1105,7 @@ Figure&nbsp;3: Left panel: sample estimated density of the fat percentage. Right
 
 </section>
 
+
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-bishop:2006" class="csl-entry" role="listitem">
 Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine Learning</em>. Springer.
@@ -546,11 +1113,29 @@ Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine Learning</em>. 
 <div id="ref-daCruz:2024" class="csl-entry" role="listitem">
 Cruz, Ana Carolina da, Camila P. E. de Souza, and Pedro H. T. O. Sousa. 2024. <span>“Fast Bayesian Basis Selection for Functional Data Representation with Correlated Errors.”</span> <a href="https://arxiv.org/abs/2405.20758">https://arxiv.org/abs/2405.20758</a>.
 </div>
+<div id="ref-deBoor:1978" class="csl-entry" role="listitem">
+De Boor, Carl. 1978. <em>A Practical Guide to Splines</em>. Vol. 27. Springer New York.
+</div>
+<div id="ref-fan:2001" class="csl-entry" role="listitem">
+Fan, Jianqing, and Runze Li. 2001. <span>“Variable Selection via Nonconcave Penalized Likelihood and Its Oracle Properties.”</span> <em>Journal of the American Statistical Association</em> 96 (456): 1348–60. <a href="https://doi.org/10.1198/016214501753382273">https://doi.org/10.1198/016214501753382273</a>.
+</div>
+<div id="ref-hastie:1986" class="csl-entry" role="listitem">
+Hastie, Trevor, and Robert Tibshirani. 1986. <span>“<span>Generalized Additive Models</span>.”</span> <em>Statistical Science</em> 1 (3): 297–310. <a href="https://doi.org/10.1214/ss/1177013604">https://doi.org/10.1214/ss/1177013604</a>.
+</div>
+<div id="ref-ramsay:2024" class="csl-entry" role="listitem">
+Ramsay, James. 2024. <em>Fda: Functional Data Analysis</em>. <a href="https://CRAN.R-project.org/package=fda">https://CRAN.R-project.org/package=fda</a>.
+</div>
+<div id="ref-ramsay:2002" class="csl-entry" role="listitem">
+Ramsay, James O, and Bernard W Silverman. 2002. <em>Applied Functional Data Analysis: Methods and Case Studies</em>. Springer.
+</div>
 <div id="ref-silverman:1985" class="csl-entry" role="listitem">
 Silverman, B. W. 1985. <span>“Some Aspects of the Spline Smoothing Approach to Non-Parametric Regression Curve Fitting.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 47 (1): 1–21. <a href="https://doi.org/10.1111/j.2517-6161.1985.tb01327.x">https://doi.org/10.1111/j.2517-6161.1985.tb01327.x</a>.
 </div>
 <div id="ref-sousa:2024" class="csl-entry" role="listitem">
 Sousa, Pedro Henrique T. O., Camila P. E. de Souza, and Ronaldo Dias. 2024. <span>“Bayesian Adaptive Selection of Basis Functions for Functional Data Representation.”</span> <em>Journal of Applied Statistics</em> 51 (5): 958–92. <a href="https://doi.org/10.1080/02664763.2023.2172143">https://doi.org/10.1080/02664763.2023.2172143</a>.
+</div>
+<div id="ref-tibshirani:1996" class="csl-entry" role="listitem">
+Tibshirani, Robert. 1996. <span>“Regression Shrinkage and Selection via the Lasso.”</span> <em>Journal of the Royal Statistical Society. Series B (Methodological)</em> 58 (1): 267–88. <a href="http://www.jstor.org/stable/2346178">http://www.jstor.org/stable/2346178</a>.
 </div>
 <div id="ref-tipping:2001" class="csl-entry" role="listitem">
 Tipping, Michael E. 2001. <span>“Sparse Bayesian Learning and the Relevance Vector Machine.”</span> <em>J. Mach. Learn. Res.</em> 1 (September): 211–44. <a href="https://doi.org/10.1162/15324430152748236">https://doi.org/10.1162/15324430152748236</a>.
@@ -558,7 +1143,22 @@ Tipping, Michael E. 2001. <span>“Sparse Bayesian Learning and the Relevance Ve
 <div id="ref-venables:2002" class="csl-entry" role="listitem">
 Venables, W. N., and B. D. Ripley. 2002. <em>Modern Applied Statistics with s</em>. Fourth. New York: Springer. <a href="https://www.stats.ox.ac.uk/pub/MASS4/">https://www.stats.ox.ac.uk/pub/MASS4/</a>.
 </div>
-</div></section></div></main> <!-- /main -->
+<div id="ref-xian:2024" class="csl-entry" role="listitem">
+Xian, Chengqian, Camila P. E. de Souza, John Jewell, and Ronaldo Dias. 2024. <span>“Clustering Functional Data via Variational Inference.”</span> <em>Advances in Data Analysis and Classification</em>. <a href="https://doi.org/10.1007/s11634-024-00590-w">https://doi.org/10.1007/s11634-024-00590-w</a>.
+</div>
+<div id="ref-zhang:2010" class="csl-entry" role="listitem">
+Zhang, Cun-Hui. 2010. <span>“<span class="nocase">Nearly unbiased variable selection under minimax concave penalty</span>.”</span> <em>The Annals of Statistics</em> 38 (2): 894–942. <a href="https://doi.org/10.1214/09-AOS729">https://doi.org/10.1214/09-AOS729</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>We avoid denoting the accelerometer measurements as <span class="math inline">\(y(t_j)\)</span> since, as stated, there are measurement times <span class="math inline">\(t_j\)</span> which appear repeatedly, with distinct <span class="math inline">\(y_j\)</span>, such that writing <span class="math inline">\(y(t_j) = y_j\)</span> would result in inconsistencies. The same is true for the random variables from which these observations are drawn, which we denote as <span class="math inline">\(Y_j\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The equivalency between <a href="#eq-expectation" class="quarto-xref">Equation&nbsp;1</a> and <a href="#eq-decomposition" class="quarto-xref">Equation&nbsp;2</a> is a consequence of the assumption of normality for the random errors in <a href="#eq-decomposition" class="quarto-xref">Equation&nbsp;2</a> (although this equivalency would hold under certain other distributions). The form in <a href="#eq-decomposition" class="quarto-xref">Equation&nbsp;2</a> is more appealing due to its inherent distinction between the deterministic and stochastic components, however, the formulation in <a href="#eq-expectation" class="quarto-xref">Equation&nbsp;1</a> (coupled with distributional assumptions on <span class="math inline">\(Y_j\)</span>) is adopted under the generic framework of ‘<em>generalized linear models</em>’ (or particularly, for function estimation, the framework of ‘<em>generalized additive models</em>’; see <span class="citation" data-cites="hastie:1986">Hastie and Tibshirani (<a href="#ref-hastie:1986" role="doc-biblioref">1986</a>)</span>).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This behavior is expected: as the object is approximately inert prior to the impact, likewise, in the immediate milliseconds following impact, it is approximately inert, eventually gaining acceleration, which dissipates as time passes, and the object eventually returns to inertia.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Unlike the Motorcycle data set, for any fixed city <span class="math inline">\(i\)</span> in the Canadian weather data set, the observation instants do not repeat and are all equally spaced. Also importantly, they are the same across all cities (that is, <span class="math inline">\(t_{ij} = t_j, \forall i \in \{1,\ldots,N\}\)</span>). This likewise implies that the matrix <span class="math inline">\(\boldsymbol{\Phi}_i\)</span> defined later is the same independent of the subscript <span class="math inline">\(i\)</span>. We opt to not remove the subscript in this data set to preserve the generality of the content. When the observation instants satisfy these conditions, the sampling design is said to be regular.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>However, it’s expected that some mean temperature functions present roughly similar behavior due to geographical proximity and climate similarity of the corresponding cities. These similarities have been studied in applications in functional data clustering, as seen in <span class="citation" data-cites="xian:2024">Xian et al. (<a href="#ref-xian:2024" role="doc-biblioref">2024</a>)</span>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -10,9 +10,6 @@ body{
 tt {
   background: #e6e6e6;
 }
-.callout-warning{
-  background: #fffce2;
-}
 #TOC a {
   color: #AD1519; /* Bootstrap primary color */
 }
@@ -29,4 +26,10 @@ a:hover {
   border-style: solid;
   border-width: 1px;
   border-radius: 10px
+}
+.algo-class {
+     background-color: #fffce2;
+     padding: 10px;
+     border: 1px solid #e6e6e6;
+     border-radius: 5px;
 }
