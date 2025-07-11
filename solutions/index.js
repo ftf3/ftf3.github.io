@@ -119,7 +119,9 @@ var out = document.getElementById("output");
                 '"Hey you!"',
                 '"And I can\'t believe that anyone would wanna do such a terrible thing, but why should I care?"',
                 '"They send the heart police to put you under cardiac arrest."',
-                '"I guess I\'m too fun, I guess I\'m too funny. If you\'re not laughing, baby, then you\'re not making money!"',];
+                '"I guess I\'m too fun, I guess I\'m too funny. If you\'re not laughing, baby, then you\'re not making money!"',
+                '"And each day I learn just a little bit more. I don\'t know why but I do know what for."',
+                '"Bobby is a monkey, my girlfriend is a horse, but I\'m not turning into anything, I\'ve never caused animal wars."'];
 	var theSource= [
                 'Chaco, Cannibal Holocaust (1980)',
                 '"Magic Bus", The Who (1968)',
@@ -240,7 +242,9 @@ var out = document.getElementById("output");
                 '"Carousel", Mr. Bungle (1991)',
                 '"Nothing Bad Ever Happens To Me", Oingo Boingo (1983)',
                 '"The Plastic Age", The Buggles (1980)',
-                '"MMMOOOAAAAAYAYA", illuminati hotties (2021)',];
+                '"MMMOOOAAAAAYAYA", illuminati hotties (2021)',
+                '"This Song Has No Title", Elton John (1973)',
+                '"Animal Day", Wall Of Voodoo (1981)',];
         if(sessionStorage.getItem('theQuotes') !== null)
         {
             var seen = JSON.parse(sessionStorage.getItem("theQuotes"));
