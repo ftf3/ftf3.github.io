@@ -121,7 +121,9 @@ var out = document.getElementById("output");
                 '"They send the heart police to put you under cardiac arrest."',
                 '"I guess I\'m too fun, I guess I\'m too funny. If you\'re not laughing, baby, then you\'re not making money!"',
                 '"And each day I learn just a little bit more. I don\'t know why but I do know what for."',
-                '"Bobby is a monkey, my girlfriend is a horse, but I\'m not turning into anything, I\'ve never caused animal wars."'];
+                '"Bobby is a monkey, my girlfriend is a horse, but I\'m not turning into anything, I\'ve never caused animal wars."',
+                '"Mr. John, Mr. John, Mr. John. Diga dia de pagamento, não fale outra coisa não."',
+                '"Pegaram Mané Beleza de emboscada no icó. Deram nela de chibata, deram nele de cipó. Cortaram dele um braço, se enganaram a cortar. E nem metade eu contei, nem mais eu posso contar."',];
 	var theSource= [
                 'Chaco, Cannibal Holocaust (1980)',
                 '"Magic Bus", The Who (1968)',
@@ -244,7 +246,9 @@ var out = document.getElementById("output");
                 '"The Plastic Age", The Buggles (1980)',
                 '"MMMOOOAAAAAYAYA", illuminati hotties (2021)',
                 '"This Song Has No Title", Elton John (1973)',
-                '"Animal Day", Wall Of Voodoo (1981)',];
+                '"Animal Day", Wall Of Voodoo (1981)',
+                '"Mr. John It\'s Pay Day (Melô do Pagamento)", Gerson King Combo (1979)',
+                '"Mané Beleza", Toni Tornado (1972)',];
         if(sessionStorage.getItem('theQuotes') !== null)
         {
             var seen = JSON.parse(sessionStorage.getItem("theQuotes"));
