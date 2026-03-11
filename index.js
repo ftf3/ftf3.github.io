@@ -124,7 +124,8 @@ var out = document.getElementById("output");
                 '"Bobby is a monkey, my girlfriend is a horse, but I\'m not turning into anything, I\'ve never caused animal wars."',
                 '"Mr. John, Mr. John, Mr. John. Diga dia de pagamento, não fale outra coisa não."',
                 '"Pegaram Mané Beleza de emboscada no icó. Deram nela de chibata, deram nele de cipó. Cortaram dele um braço, se enganaram a cortar. E nem metade eu contei, nem mais eu posso contar."',
-                '"Everything is okay, got my old phone replaced, now I do nothing faster than I did yesterday."',];
+                '"Everything is OK, got my old phone replaced, now I do nothing faster than I did yesterday."',
+                '"It just works."',];
 	var theSource= [
                 'Chaco, Cannibal Holocaust (1980)',
                 '"Magic Bus", The Who (1968)',
@@ -250,7 +251,8 @@ var out = document.getElementById("output");
                 '"Animal Day", Wall Of Voodoo (1981)',
                 '"Mr. John It\'s Pay Day (Melô do Pagamento)", Gerson King Combo (1979)',
                 '"Mané Beleza", Toni Tornado (1972)',
-                '"Wedding Guests", Cheekface (2021)',];
+                '"Wedding Guests", Cheekface (2021)',
+                'Todd Howard (2015)',];
         if(sessionStorage.getItem('theQuotes') !== null)
         {
             var seen = JSON.parse(sessionStorage.getItem("theQuotes"));
