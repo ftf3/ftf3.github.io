@@ -125,7 +125,8 @@ var out = document.getElementById("output");
                 '"Mr. John, Mr. John, Mr. John. Diga dia de pagamento, não fale outra coisa não."',
                 '"Pegaram Mané Beleza de emboscada no icó. Deram nela de chibata, deram nele de cipó. Cortaram dele um braço, se enganaram a cortar. E nem metade eu contei, nem mais eu posso contar."',
                 '"Everything is OK, got my old phone replaced, now I do nothing faster than I did yesterday."',
-                '"It just works."',];
+                '"It just works."',
+                '"Just commuting and computing, living like an ant."',];
 	var theSource= [
                 'Chaco, Cannibal Holocaust (1980)',
                 '"Magic Bus", The Who (1968)',
@@ -252,7 +253,8 @@ var out = document.getElementById("output");
                 '"Mr. John It\'s Pay Day (Melô do Pagamento)", Gerson King Combo (1979)',
                 '"Mané Beleza", Toni Tornado (1972)',
                 '"Wedding Guests", Cheekface (2021)',
-                'Todd Howard (2015)',];
+                'Todd Howard (2015)',
+                '"Dunning Kruger\'s Loser Cruiser", Tropical Fuck Storm (2025)',];
         if(sessionStorage.getItem('theQuotes') !== null)
         {
             var seen = JSON.parse(sessionStorage.getItem("theQuotes"));
